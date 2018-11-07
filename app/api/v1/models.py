@@ -1,10 +1,18 @@
-from flask import Flask
-from flask_restplus import Api
+db = [
+    {
+        "user": [],
+        "parcel": []
+    }
+    ]
 
-app = Flask(__name__)
-api = Api(app)
 
+class Model():
+    def __init__(self):
+        self.db = db
 
-class Signup(Resource):
-    def get(self):
-        return {'hey': 'there'}
+    def add_user(self, data):
+        user = self.db[0]['user']
+        user.append(data)
+        return data
+
+    
