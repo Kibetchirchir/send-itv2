@@ -2,7 +2,8 @@ import base64
 db = [
     {
         "user": [],
-        "parcel": []
+        "parcel": [],
+        "tokens": []
     }
     ]
 
@@ -26,4 +27,4 @@ class Model():
                    "role": user_role}
 
         user.append(payload)
-        return payload['name']
+        return payload

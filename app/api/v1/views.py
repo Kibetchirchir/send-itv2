@@ -8,7 +8,7 @@ api = Api(app)
 signup_details = api.model('user', {'user': fields.String('The user name')})
 
 
-class SignUp(Resource , Model):
+class User(Resource, Model):
     def get(self):
         pass
 
@@ -16,4 +16,3 @@ class SignUp(Resource , Model):
         user = Model()
         data = user.add_user(api.payload)
         return {'result': 'added', 'message':'Successfully signed up', 'data': data}, 201
-
