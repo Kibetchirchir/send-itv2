@@ -27,4 +27,4 @@ class Model():
                    "role": user_role}
 
         user.append(payload)
-        return payload
+        return payload['name']

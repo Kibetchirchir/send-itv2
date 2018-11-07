@@ -25,7 +25,7 @@ class UserTestCase(unittest.TestCase):
 
     def test_signup_fail(self):
         """Test API cannot take null (POST request)"""
-        res = self.client().post("api/v1/signup", json=self.user)
+        res = self.client().post("api/v1/signup", data=self.user)
         self.assertEqual(res.status_code, 400)
         self.assertIn("provide all fields", str(res.data))
 
