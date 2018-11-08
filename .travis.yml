@@ -10,7 +10,7 @@ install:
   - pip install coveralls
 
 script:
-  - pytest --cov=/my_app/
+  - pytest 
 
 after_success:
   - coveralls
