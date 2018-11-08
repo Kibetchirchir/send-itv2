@@ -10,4 +10,7 @@ install:
   - pip install coveralls
 
 script:
-  - python testapi.py
+  - pytest --cov=app/
+
+after_success:
+  - coveralls

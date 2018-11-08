@@ -7,7 +7,7 @@ from app import create_app
 
 
 class UserTestCase(unittest.TestCase):
-    """This class represents the  test case"""
+    """This class represents the user test case"""
 
     def setUp(self):
         """Define test variables and initialize app."""
@@ -79,6 +79,14 @@ class UserTestCase(unittest.TestCase):
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 403)
         self.assertIn("you are not an admin", str(res.data))
+
+
+class ParcelTestCase(unittest.TestCase):
+    """This test case tets the parcel test cases"""
+    def setUp(self):
+        """Define test variables and initialize app."""
+        self.app = create_app(config_name="testing")
+        self.client = self.app.test_client
 
     def test_user_add_parcel(self):
         """Test API if it adds a parcel(POST)"""
