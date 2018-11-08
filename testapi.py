@@ -42,7 +42,7 @@ class UserTestCase(unittest.TestCase):
         res = self.client().post("api/v1/signup", json=self.user)
         self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
-        self.assertEqual(res.status_code, 303)
+        self.assertEqual(res.status_code, 200)
         self.assertIn("redirect to user", str(res.data))
 
     def test_admin_login_success(self):
@@ -53,7 +53,7 @@ class UserTestCase(unittest.TestCase):
         res = self.client().post("api/v1/signup", json=self.admin)
         self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
-        self.assertEqual(res.status_code, 303)
+        self.assertEqual(res.status_code, 200)
         self.assertIn("redirect to admin", str(res.data))
 
     def test_user_login_failed(self):
@@ -79,14 +79,25 @@ class UserTestCase(unittest.TestCase):
         self.assertIn("you are not an admin", str(res.data))
 
     def test_user_add_parcel(self):
-        """Test API if it adds a parcel"""
+        """Test API if it adds a parcel(POST)"""
         parcel = {"user_id": 1,
-                "parcel_type": "letter",
-                "recepient_number": "254715428709",
-                "Dest": "Moi_avenue"}
+                  "parcel_type": "letter",
+                  "recepient_number": "254715428709",
+                  "Dest": "Moi_avenue"
+                  }
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 201)
         self.assertIn("order_no", str(res.data))
+
+    def test_user_add_parcel_bad_Request(self):
+        """Test API for bad request"""
+        parcel = {"user_id": 1,
+                  "parcel_type": "letter",
+                  "Dest": "Moi_avenue"
+                  }
+        res = self.client().post("api/v1/parcels", json=parcel)
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("destination", str(res.data))
 
 
 # Make the tests conveniently executable

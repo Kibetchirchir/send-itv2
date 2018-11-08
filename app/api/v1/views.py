@@ -66,11 +66,11 @@ class Login(Resource, Model):
             password = data['password']
             if password == password_given:
                 if page == "user" and role == 'user':  # checking the page requested
-                    return {'result': 'success', 'message': 'redirect to user'}, 303
+                    return {'result': 'success', 'message': 'redirect to user'}, 200
                 elif page == "user" and role == 'admin':
-                    return {'result': 'success', 'message': 'redirect to user'}, 303
+                    return {'result': 'success', 'message': 'redirect to user'}, 200
                 elif page == "admin" and role == 'admin':
-                    return {'result': 'success', 'message': 'redirect to admin'}, 303
+                    return {'result': 'success', 'message': 'redirect to admin'}, 200
                 elif page == "admin" and role == 'user':
                     return {'result': 'failed', 'message': 'you are not an admin'}, 403
             else:
