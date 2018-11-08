@@ -103,7 +103,9 @@ class Parcels(Resource, Model):
                 else:
                     return {'result': 'failed', 'message': 'please provide the recepient number'}, 400
                 if payload['user_id'] or payload['parcel_type'] or payload['Dest'] or payload['recepient_number']:
-                    pass
+                    parcel = Model()
+                    data = parcel.add_parcel(payload)
+                    return {'result': 'added', 'message': 'Successfully added', 'parcel': data}, 201
                 else:
                     return {'result': 'failed', 'message': 'please read the api document'}, 400
             else:

@@ -63,9 +63,11 @@ class Model():
         parcel_type = data['parcel_type']
         user_id = data['user_id']
         dest = data['Dest']
-        payload = {"order_number": order_number,
+        recepient = data['recepient_number']
+        payload = {"order_no": order_number,
                    "parcel_type": parcel_type,
                    "user_id": user_id,
-                   "dest": dest}
+                   "dest": dest,
+                   "recepient_no": recepient}
         parcel.append(payload)
         return payload
