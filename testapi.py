@@ -78,6 +78,16 @@ class UserTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 403)
         self.assertIn("you are not an admin", str(res.data))
 
+    def test_user_add_parcel(self):
+        """Test API if it adds a parcel"""
+        parcel = {"user_id": 1,
+                "parcel_type": "letter",
+                "recepient_number": "254715428709",
+                "Dest": "Moi_avenue"}
+        res = self.client().post("api/v1/parcels", json=parcel)
+        self.assertEqual(res.status_code, 201)
+        self.assertIn("order_no", str(res.data))
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
