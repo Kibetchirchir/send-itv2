@@ -65,9 +65,9 @@ class UserTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 401)
-        self.assertIn("redirect to user", str(res.data))
+        self.assertIn("email not found", str(res.data))
 
-    def test_user_trying_asmin_page(self):
+    def test_user_trying_admin_page(self):
         """Test API if user can access admin page"""
         data = {"email": "langatchirhir@gmail.com",
                 "password": "kevin12345",
@@ -77,6 +77,7 @@ class UserTestCase(unittest.TestCase):
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 403)
         self.assertIn("redirect to user", str(res.data))
+
 
 
 # Make the tests conveniently executable

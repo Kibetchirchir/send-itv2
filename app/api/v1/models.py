@@ -51,6 +51,7 @@ class Model():
                 return (payload)
             else:
                 i = i = 1
-            payload = {"status": 0}
-            return (payload)
+        payload = {"status": 0}
+        return (payload)
+
 
