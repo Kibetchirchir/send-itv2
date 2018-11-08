@@ -77,3 +77,34 @@ class Login(Resource, Model):
                 return {'result': 'failed', 'message': 'wrong password'}, 401
         else:
             return {'result': 'failed', 'message': 'email not found'}, 401
+
+
+class Parcels(Resource, Model):
+    """The parcel class which handles parcels"""
+    def post(self):
+        """The post request from customer"""
+        if api.payload:
+            payload = api.payload
+            if payload['user_id'] or payload['parcel_type'] or payload['Dest'] or payload['recepient_number']:
+                if 'user_id' in payload:
+                    pass
+                else:
+                    return {'result': 'failed', 'message': 'please provide user_id'}, 400
+                if 'parcel_type' in payload:
+                    pass
+                else:
+                    return {'result': 'failed', 'message': 'please provide parcel_type'}, 400
+                if 'Dest' in payload:
+                    pass
+                else:
+                    return {'result': 'failed', 'message': 'please provide destination'}, 400
+                if 'recepient_number' in payload:
+                    pass
+                else:
+                    return {'result': 'failed', 'message': 'please provide the recepient number'}, 400
+                if payload['user_id'] or payload['parcel_type'] or payload['Dest'] or payload['recepient_number']:
+                    
+            else:
+                return {'result': 'failed', 'message': 'please provide a valid json data refer API doc'}, 400
+        else:
+            return {'result': 'failed', 'message': 'please provide a json data'}, 400
