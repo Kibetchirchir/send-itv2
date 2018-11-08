@@ -93,7 +93,7 @@ class UserTestCase(unittest.TestCase):
         """Test API for bad request"""
         parcel = {"user_id": 1,
                   "parcel_type": "letter",
-                  "Dest": "Moi_avenue"
+                  "recepient_number": "254715428709"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 400)
