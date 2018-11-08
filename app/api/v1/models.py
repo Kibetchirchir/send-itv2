@@ -1,4 +1,6 @@
 import base64
+import random
+
 db = [
     {
         "user": [],
@@ -54,4 +56,16 @@ class Model():
         payload = {"status": 0}
         return (payload)
 
-
+    def add_parcel(self, data):
+        """This model adds parcels to our datastructure"""
+        parcel = self.db[0]['parcel']
+        order_number = random.randint(1000, 9999)
+        parcel_type = data['parcel_type']
+        user_id = data['user_id']
+        dest = data['Dest']
+        payload = {"order_number": order_number,
+                   "parcel_type": parcel_type,
+                   "user_id": user_id,
+                   "dest": dest}
+        parcel.append(payload)
+        return payload
