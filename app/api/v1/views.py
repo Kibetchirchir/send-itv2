@@ -52,17 +52,28 @@ class Login(Resource, Model):
     def post(self):
         """The post request for login"""
         payload = api.payload
+        # Get the variables you'll use
         email = payload['email']
+        page = payload['page']
+        password_given = payload['password']
         user = Model()
         data = user.get_user(email)
-        if data['status'] == 1:
-            if payload['page'] == "user" and data['role'] == 'user':  # checking the page requested
-                return {'result': 'success', 'message': 'redirect to user', 'data': data}, 303
-            elif payload['page'] == "user" and data['role'] == 'admin':
-                return {'result': 'success', 'message': 'redirect to user', 'data': data}, 303
-            elif payload['page'] == "admin" and data['role'] == 'admin':
-                return {'result': 'success', 'message': 'redirect to user', 'data': data}, 303
+        status = data['status'] # 1 rep email is found 0 rep email was not found
 
+        if status == 1:
+            # get the data from model
+            role = data['role']
+            password = data['password']
+            if password == password_given:
+                if page == "user" and role == 'user':  # checking the page requested
+                    return {'result': 'success', 'message': 'redirect to user'}, 303
+                elif page == "user" and role == 'admin':
+                    return {'result': 'success', 'message': 'redirect to user'}, 303
+                elif page == "admin" and role == 'admin':
+                    return {'result': 'success', 'message': 'redirect to admin'}, 303
+                elif page == "admin" and role == 'user':
+                    return {'result': 'failed', 'message': 'you are not an admin'}, 403
+            else:
+                return {'result': 'failed', 'message': 'wrong password'}, 401
         else:
             return {'result': 'failed', 'message': 'email not found'}, 401
-

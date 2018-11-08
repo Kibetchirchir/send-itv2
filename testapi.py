@@ -36,7 +36,7 @@ class UserTestCase(unittest.TestCase):
 
     def test_user_login_successful(self):
         """Test API user can login(POST request"""
-        data ={"email":"langatchirhir@gmail.com",
+        data ={"email":"langatchirchir@gmail.com",
                "password": "kevin12345",
                "page": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
@@ -69,15 +69,14 @@ class UserTestCase(unittest.TestCase):
 
     def test_user_trying_admin_page(self):
         """Test API if user can access admin page"""
-        data = {"email": "langatchirhir@gmail.com",
+        data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345",
-                "page": "user"}
+                "page": "admin"}
         res = self.client().post("api/v1/signup", json=self.user)
         self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 403)
-        self.assertIn("redirect to user", str(res.data))
-
+        self.assertIn("you are not an admin", str(res.data))
 
 
 # Make the tests conveniently executable
