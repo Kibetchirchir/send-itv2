@@ -16,6 +16,11 @@ class UserTestCase(unittest.TestCase):
                      "role": "user",
                      "password": "kevin12345"
                      }
+        self.admin = {"name": "admin",
+                      "email": "admin@gmail.com",
+                      "role": "admin",
+                      "password": "admin"
+                     }
 
     def test_signup(self):
         """Test API can signup (POST request)"""
@@ -28,6 +33,50 @@ class UserTestCase(unittest.TestCase):
         res = self.client().post("api/v1/signup", data=self.user)
         self.assertEqual(res.status_code, 400)
         self.assertIn("provide all fields", str(res.data))
+
+    def test_user_login_successful(self):
+        """Test API user can login(POST request"""
+        data ={"email":"langatchirhir@gmail.com",
+               "password": "kevin12345",
+               "page": "user"}
+        res = self.client().post("api/v1/signup", json=self.user)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 303)
+        self.assertIn("redirect to user", str(res.data))
+
+    def test_admin_login_success(self):
+        """Test API admin can login(POST request)"""
+        data = {"email": "admin@gmail.com",
+                "password": "admin",
+                "page": "admin"}
+        res = self.client().post("api/v1/signup", json=self.admin)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 303)
+        self.assertIn("redirect to admin", str(res.data))
+
+    def test_user_login_failed(self):
+        """Test API user cannot login with wrong login credentials"""
+        data = {"email": "langatchirhir@gmail.com",
+                "password": "kevin",
+                "page": "user"}
+        res = self.client().post("api/v1/signup", json=self.user)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 401)
+        self.assertIn("redirect to user", str(res.data))
+
+    def test_user_trying_asmin_page(self):
+        """Test API if user can access admin page"""
+        data = {"email": "langatchirhir@gmail.com",
+                "password": "kevin12345",
+                "page": "user"}
+        res = self.client().post("api/v1/signup", json=self.user)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 403)
+        self.assertIn("redirect to user", str(res.data))
 
 
 # Make the tests conveniently executable
