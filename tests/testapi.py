@@ -12,9 +12,9 @@ class UserTestCase(unittest.TestCase):
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
         self.user = {'name': 'chirchir Kibet',
-                           'email': 'langatchirchir@gmail.com',
-                           'role': 'user',
-                            'password': 'kevin12345'}
+                    'email': 'langatchirchir@gmail.com',
+                    'role': 'user',
+                    'password': 'kevin12345'}
 
 
         # binds the app to the current context
