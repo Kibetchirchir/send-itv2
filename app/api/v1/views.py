@@ -17,8 +17,8 @@ class Users(Resource, Model):
     def post(self):
         """The post request for the class"""
         payload = api.payload
+        # check if payload is empty
         if payload:
-
             if payload['email'] or payload['name'] or payload['password'] or payload['role']:
                 if "email" in payload:
                     pass
