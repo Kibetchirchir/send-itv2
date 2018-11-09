@@ -114,4 +114,3 @@ class Parcels(Resource, Model):
             return {'result': 'failed', 'message': 'please provide a json data'}, 400
     def get(self):
         parcel = Model()
-        

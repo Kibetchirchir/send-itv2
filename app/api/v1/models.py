@@ -10,7 +10,7 @@ db = [
     ]
 
 
-class Model():
+class Model:
     """This is the model class to manipulate data"""
     def __init__(self):
         """initialzation for our data"""
@@ -54,7 +54,7 @@ class Model():
             else:
                 i = i + 1
         payload = {"status": 0}
-        return (payload)
+        return payload
 
     def add_parcel(self, data):
         """This model adds parcels to our datastructure"""
@@ -71,3 +71,8 @@ class Model():
                    "recepient_no": recepient}
         parcel.append(payload)
         return payload
+    
+    def get_all_parcels(self):
+        parcels = self.db[0]['parcel']
+        return parcels
+
