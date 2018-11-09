@@ -130,3 +130,6 @@ class GetOneParcel(Resource, Model):
             return {'result': 'failed', 'message': 'not found'}, 404
         else:
             return {'result': 'success', 'parcel': parcel}, 200
+
+class CancelParcel(Resource, Model):
+    """This class cancels the order"""

@@ -104,7 +104,7 @@ class ParcelTestCase(unittest.TestCase):
         parcel = {"user_id": 1,
                   "parcel_type": "letter",
                   "recepient_number": "254715428709",
-                  "status": "on transit"
+                  "status": "on_transit"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 400)

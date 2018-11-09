@@ -62,12 +62,15 @@ class Model:
         parcel_type = data['parcel_type']
         user_id = data['user_id']
         dest = data['Dest']
+        status = data['status']
         recepient = data['recepient_number']
         payload = {"order_no": order_number,
                    "parcel_type": parcel_type,
                    "user_id": user_id,
                    "dest": dest,
-                   "recepient_no": recepient}
+                   "recepient_no": recepient,
+                   "status": status
+                   }
         parcel.append(payload)
         return payload
 
@@ -95,3 +98,22 @@ class Model:
                 i = i + 1
         return 0
 
+    def cancel_parcel(self,order_id):
+        parcel = self.db[0]['parcel']
+        array_length = len(parcel) - 1
+        i = 0  # this is the value to append to my array
+        while i <= array_length:
+            if parcel[i]['order_no'] == order_id:
+                parcel_type = parcel[i]['parcel_type']
+                user_id = parcel[i]['user_id']
+                dest = parcel[i]['dest']
+                recepient_no = parcel[i]['recepient_no']
+                status = parcel[i]['status']
+                if status == 'on_transit':
+                    parcel[i]['status'] = 'cancel'
+                    return 1
+                else:
+                    return 2
+            else:
+                i = i + 1
+        return 0
