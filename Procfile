@@ -1,1 +1,1 @@
-web: gunicorn app:api
+web: gunicorn create_app('production'):app
