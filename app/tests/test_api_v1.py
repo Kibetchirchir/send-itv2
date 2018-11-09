@@ -155,7 +155,7 @@ class ParcelTestCase(unittest.TestCase):
                   "Dest": "Moi_avenue",
                   "status": "delivered"
                   }
-        res = self.client().post("api/v1/parcels", json=self.parcel)
+        res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 201)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']

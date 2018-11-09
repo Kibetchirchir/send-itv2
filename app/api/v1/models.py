@@ -111,9 +111,9 @@ class Model:
                 status = parcel[i]['status']
                 if status == 'on_transit':
                     parcel[i]['status'] = 'cancel'
-                    return 1
+                    return parcel[i]['status']
                 else:
-                    return 2
+                    return parcel[i]['status']
             else:
                 i = i + 1
         return 0

@@ -138,9 +138,9 @@ class CancelParcel(Resource, Model):
         """the put request"""
         parcel = Model()
         cancel = parcel.cancel_parcel(order_no)
-        if cancel == 1: # code for the updated
+        if cancel == 'cancel': # code for the updated
             return {'result': 'success', 'message': 'processing'}, 202
-        elif cancel == 2:  # code for a delivered parcel
+        elif cancel == 'delivered':  # code for a delivered parcel
             return {'result': 'failed', 'message': 'Already delivered'}, 403
         else:
             return {'result': 'failed', 'message': 'order number not found'}, 404
