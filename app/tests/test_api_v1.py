@@ -87,15 +87,15 @@ class ParcelTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
+        self.parcel=parcel = {"user_id": 1,
+                              "parcel_type": "letter",
+                              "recepient_number": "254715428709",
+                              "Dest": "Moi_avenue"
+                              }
 
     def test_user_add_parcel(self):
         """Test API if it adds a parcel(POST)"""
-        parcel = {"user_id": 1,
-                  "parcel_type": "letter",
-                  "recepient_number": "254715428709",
-                  "Dest": "Moi_avenue"
-                  }
-        res = self.client().post("api/v1/parcels", json=parcel)
+        res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
         self.assertIn("order_no", str(res.data))
 
@@ -108,6 +108,15 @@ class ParcelTestCase(unittest.TestCase):
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 400)
         self.assertIn("destination", str(res.data))
+
+    def test_admin_all_parcels(self):
+        """Test API for getting all parcels (GET_REQUEST)"""
+        res = self.client().post("api/v1/parcels", json=self.parcel)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().get("api/v1/parcels")
+        self.assertEqual(res.status_code, 403)
+        self.assertIn("254715428709", str(res.data))
+
 
 
 # Make the tests conveniently executable

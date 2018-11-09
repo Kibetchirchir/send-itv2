@@ -112,3 +112,6 @@ class Parcels(Resource, Model):
                 return {'result': 'failed', 'message': 'please provide a valid json data refer API doc'}, 400
         else:
             return {'result': 'failed', 'message': 'please provide a json data'}, 400
+    def get(self):
+        parcel = Model()
+        
