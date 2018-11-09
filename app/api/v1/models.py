@@ -71,7 +71,7 @@ class Model:
                    "recepient_no": recepient}
         parcel.append(payload)
         return payload
-    
+
     def get_all_parcels(self):
         parcels = self.db[0]['parcel']
         return parcels
