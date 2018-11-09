@@ -172,19 +172,11 @@ class ParcelTestCase(unittest.TestCase):
                   "Dest": "Moi_avenue",
                   "status": "delivered"
                   }
-        parcel1 = {"user_id": 4,
-                   "parcel_type": "letter",
-                   "recepient_number": "254715428709",
-                   "Dest": "Moi_avenue",
-                   "status": "on_transit"
-                   }
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 201)
-        res = self.client().post("api/v1/parcels", json=parcel)
-        self.assertEqual(res.status_code, 201)
-        res = self.client().put("api/v1/users/4/parcels")
+        res = self.client().get("api/v1/users/4/parcels")
         self.assertEqual(res.status_code, 200)
-        self.assertIn("2", str(res.data))
+        self.assertIn("254715428709", str(res.data))
 
 
 # Make the tests conveniently executable

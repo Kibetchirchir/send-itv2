@@ -125,8 +125,9 @@ class Model:
         i = 0  # this is the value to append to my array
         while i <= array_length:
             if parcel[i]["user_id"] == user_id:
-                # parcel.append(parcel[i])
+                parcel.append(parcel[i])
                 i = i + 1
-
-        return i
+            else:
+                i = i + 1
+        return parcel
 
