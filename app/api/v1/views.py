@@ -131,5 +131,16 @@ class GetOneParcel(Resource, Model):
         else:
             return {'result': 'success', 'parcel': parcel}, 200
 
+
 class CancelParcel(Resource, Model):
-    """This class cancels the order"""
+    """This class cancels the orders"""
+    def put(self, order_no):
+        """the put request"""
+        parcel = Model()
+        cancel = parcel.cancel_parcel(order_no)
+        if cancel == 1: # code for the updated
+            return {'result': 'success', 'message': 'processing'}, 202
+        elif cancel == 2:  # code for a delivered parcel
+            return {'result': 'failed', 'message': 'Already delivered'}, 403
+        else:
+            return {'result': 'failed', 'message': 'order number not found'}, 404

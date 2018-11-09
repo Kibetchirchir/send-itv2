@@ -87,11 +87,12 @@ class ParcelTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
-        self.parcel=parcel = {"user_id": 1,
-                              "parcel_type": "letter",
-                              "recepient_number": "254715428709",
-                              "Dest": "Moi_avenue"
-                              }
+        self.parcel = {"user_id": 1,
+                       "parcel_type": "letter",
+                       "recepient_number": "254715428709",
+                       "Dest": "Moi_avenue",
+                       "status": "on_transit"
+                       }
 
     def test_user_add_parcel(self):
         """Test API if it adds a parcel(POST)"""
@@ -151,9 +152,10 @@ class ParcelTestCase(unittest.TestCase):
         parcel = {"user_id": 1,
                   "parcel_type": "letter",
                   "recepient_number": "254715428709",
+                  "Dest": "Moi_avenue",
                   "status": "delivered"
                   }
-        res = self.client().post("api/v1/parcels", json=parcel)
+        res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']
