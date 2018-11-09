@@ -130,9 +130,20 @@ class ParcelTestCase(unittest.TestCase):
 
     def test_specific_parcel_fail(self):
         """Test API for getting a specific parcel with wrong order_number"""
-        res = self.client().get("api/v1//parcels/fnfnf")
+        res = self.client().get("api/v1/parcels/fnfnf")
         self.assertEqual(res.status_code, 404)
         self.assertIn("not found", str(res.data))
+
+    def test_user_can_cancel(self):
+        """Test API for cancelling parcel(PUT method)"""
+        res = self.client().post("api/v1/parcels", json=self.parcel)
+        self.assertEqual(res.status_code, 201)
+        data = json.loads(res.get_data(as_text=True))
+        order_no = data['parcel']['order_no']
+        order_no = str(order_no)
+        res = self.client().put("api/v1/parcels/" + order_no + "/cancel")
+        self.assertEqual(res.status_code, 202)
+        self.assertIn("processing", str(res.data))
 
 
 # Make the tests conveniently executable
