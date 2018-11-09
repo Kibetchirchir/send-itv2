@@ -144,3 +144,12 @@ class CancelParcel(Resource, Model):
             return {'result': 'failed', 'message': 'Already delivered'}, 403
         else:
             return {'result': 'failed', 'message': 'order number not found'}, 404
+
+
+class FetchAllParcel(Resource, Model):
+    def get(self, user_id):
+        parcel = Model()
+        users = parcel.get_user_parcels(user_id)
+        return users
+
+

@@ -8,6 +8,7 @@ db = [
         "tokens": []
     }
     ]
+parcel = []
 
 
 class Model:
@@ -98,7 +99,7 @@ class Model:
                 i = i + 1
         return 0
 
-    def cancel_parcel(self,order_id):
+    def cancel_parcel(self, order_id):
         parcel = self.db[0]['parcel']
         array_length = len(parcel) - 1
         i = 0  # this is the value to append to my array
@@ -117,3 +118,15 @@ class Model:
             else:
                 i = i + 1
         return 0
+
+    def get_user_parcels(self, user_id):
+        parcel = self.db[0]['parcel']
+        array_length = len(parcel) - 1
+        i = 0  # this is the value to append to my array
+        while i <= array_length:
+            if parcel[i]["user_id"] == user_id:
+                # parcel.append(parcel[i])
+                i = i + 1
+
+        return i
+
