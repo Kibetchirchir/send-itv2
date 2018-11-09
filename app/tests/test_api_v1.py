@@ -103,7 +103,8 @@ class ParcelTestCase(unittest.TestCase):
         """Test API for bad request"""
         parcel = {"user_id": 1,
                   "parcel_type": "letter",
-                  "recepient_number": "254715428709"
+                  "recepient_number": "254715428709",
+                  "status": "on transit"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 400)
@@ -144,6 +145,22 @@ class ParcelTestCase(unittest.TestCase):
         res = self.client().put("api/v1/parcels/" + order_no + "/cancel")
         self.assertEqual(res.status_code, 202)
         self.assertIn("processing", str(res.data))
+
+    def test_user_cannot_cancel_delivered(self):
+        """Test API for cancelling delivered parcel(PUT method)"""
+        parcel = {"user_id": 1,
+                  "parcel_type": "letter",
+                  "recepient_number": "254715428709",
+                  "status": "delivered"
+                  }
+        res = self.client().post("api/v1/parcels", json=parcel)
+        self.assertEqual(res.status_code, 201)
+        data = json.loads(res.get_data(as_text=True))
+        order_no = data['parcel']['order_no']
+        order_no = str(order_no)
+        res = self.client().put("api/v1/parcels/" + order_no + "/cancel")
+        self.assertEqual(res.status_code, 403)
+        self.assertIn("failed", str(res.data))
 
 
 # Make the tests conveniently executable
