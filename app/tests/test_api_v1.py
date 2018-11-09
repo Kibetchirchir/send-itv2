@@ -121,7 +121,8 @@ class ParcelTestCase(unittest.TestCase):
         """Test API for getting a specific parcel using the order number"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
-        order_no = res.parcel['order_no']
+        data = res.json()
+        order_no = data['parcel']['order_no']
         res = self.client().get("api/v1//parcels/"+order_no)
         self.assertEqual(res.status_code, 200)
         self.assertIn("254715428709", str(res.data))
