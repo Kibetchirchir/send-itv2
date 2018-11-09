@@ -117,3 +117,8 @@ class Parcels(Resource, Model):
         parcel = Model()
         parcels = parcel.get_all_parcels()
         return {'result': 'success', 'parcels': parcels}, 200
+
+
+class GetOneParcel(Resource, Model):
+    """This class gets specific parcel"""
+

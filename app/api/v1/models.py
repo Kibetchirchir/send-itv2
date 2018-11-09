@@ -40,7 +40,6 @@ class Model:
         array_len = len(user) - 1
         # The array to loop
         i = 0
-
         while i <= array_len:
             if user[i]['email'] == email:
                 name = user[i]['email']
@@ -50,7 +49,7 @@ class Model:
                            "role": role,
                            "password": password,
                            "status": 1}
-                return (payload)
+                return payload
             else:
                 i = i + 1
         payload = {"status": 0}
@@ -75,4 +74,24 @@ class Model:
     def get_all_parcels(self):
         parcels = self.db[0]['parcel']
         return parcels
+
+    def get_parcel(self, order_id):
+        parcel = self.db[0]['parcel']
+        array_length = len(parcel) - 1
+        i = 0  # this is the value to append to my array
+        while i <= array_length:
+            if parcel[i]['order_no'] == order_id:
+                parcel_type = parcel[i]['parcel_type']
+                user_id = parcel[i]['user_id']
+                dest = parcel[i]['dest']
+                recepient_no = parcel[i]['recepient_no']
+                parcel = {"parcel_type": parcel_type,
+                          "user_id": user_id,
+                          "destination": dest,
+                          "recepient_no": recepient_no
+                          }
+                return parcel
+            else:
+                i = i + 1
+        return 0
 
