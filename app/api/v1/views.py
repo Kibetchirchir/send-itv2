@@ -121,4 +121,11 @@ class Parcels(Resource, Model):
 
 class GetOneParcel(Resource, Model):
     """This class gets specific parcel"""
-
+    def get(self, order_no):
+        """the get request"""
+        parcels = Model
+        parcel = parcels.get_parcel(order_no)
+        if parcel == 0:
+            return {'result': 'failed', 'message': 'not found'}, 404
+        else:
+            return {'result': 'added', 'parcel': parcel}, 200
