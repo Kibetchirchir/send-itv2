@@ -117,6 +117,20 @@ class ParcelTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertIn("254715428709", str(res.data))
 
+    def test_specific_parcels(self):
+        """Test API for getting a specific parcel using the order number"""
+        res = self.client().post("api/v1/parcels", json=self.parcel)
+        self.assertEqual(res.status_code, 201)
+        order_no = res.parcel['order_no']
+        res = self.client().get("api/v1//parcels/"+order_no)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("254715428709", str(res.data))
+
+    def test_specific_parcel_fail(self):
+        """Test API for getting a specific parcel with wrong order_number"""
+        res = self.client().get("api/v1//parcels/fnfnf")
+        self.assertEqual(res.status_code, 404)
+        self.assertIn("not found", str(res.data))
 
 
 # Make the tests conveniently executable
