@@ -164,6 +164,28 @@ class ParcelTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 403)
         self.assertIn("failed", str(res.data))
 
+    def test_get_all_parcels_for_user(self):
+        """Test API for getting a all parcels created by a user"""
+        parcel = {"user_id": 4,
+                  "parcel_type": "letter",
+                  "recepient_number": "254715428709",
+                  "Dest": "Moi_avenue",
+                  "status": "delivered"
+                  }
+        parcel1 = {"user_id": 4,
+                   "parcel_type": "letter",
+                   "recepient_number": "254715428709",
+                   "Dest": "Moi_avenue",
+                   "status": "on_transit"
+                   }
+        res = self.client().post("api/v1/parcels", json=parcel)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().post("api/v1/parcels", json=parcel)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().put("api/v1/users/4/parcels")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("2", str(res.data))
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
