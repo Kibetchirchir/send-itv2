@@ -24,28 +24,28 @@ class Users(Resource, Model):
                 if "email" in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide the email'}, 400)
+                    return {'result': 'failed', 'message': 'please provide the email'}, 400
                 if "name" in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide the name'}, 400)
+                    return {'result': 'failed', 'message': 'please provide the name'}, 400
                 if "password" in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide the password'}, 400)
+                    return {'result': 'failed', 'message': 'please provide the password'}, 400
                 if "role" in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide the role'}, 400)
+                    return {'result': 'failed', 'message': 'please provide the role'}, 400
                 if payload['email'] and payload['name'] and payload['password'] and payload['role']:
                     user = Model()
                     data = user.add_user(payload)
-                    return jsonify({'result': 'added', 'message': 'Successfully signed up', 'data': data}, 201)
+                    return {'result': 'added', 'message': 'Successfully signed up', 'data': data}, 201
                 else:
-                    return jsonify({'result': 'failed', 'message': 'bad request refer to API document'}, 400)
+                    return {'result': 'failed', 'message': 'bad request refer to API document'}, 400
 
         else:
-            return jsonify({'result': 'failed', 'message': 'provide all fields'}, 400)
+            return {'result': 'failed', 'message': 'provide all fields'}, 400
 
 
 class Login(Resource, Model):
@@ -67,17 +67,17 @@ class Login(Resource, Model):
             password = data['password']
             if password == password_given:
                 if page == "user" and role == 'user':  # checking the page requested
-                    return jsonify({'result': 'success', 'message': 'redirect to user'}, 200)
+                    return {'result': 'success', 'message': 'redirect to user'}, 200
                 elif page == "user" and role == 'admin':
-                    return jsonify({'result': 'success', 'message': 'redirect to user'}, 200)
+                    return {'result': 'success', 'message': 'redirect to user'}, 200
                 elif page == "admin" and role == 'admin':
-                    return jsonify({'result': 'success', 'message': 'redirect to admin'}, 200)
+                    return {'result': 'success', 'message': 'redirect to admin'}, 200
                 elif page == "admin" and role == 'user':
-                    return jsonify({'result': 'failed', 'message': 'you are not an admin'}, 403)
+                    return {'result': 'failed', 'message': 'you are not an admin'}, 403
             else:
-                return jsonify({'result': 'failed', 'message': 'wrong password'}, 401)
+                return {'result': 'failed', 'message': 'wrong password'}, 401
         else:
-            return jsonify({'result': 'failed', 'message': 'email not found'}, 401)
+            return {'result': 'failed', 'message': 'email not found'}, 401
 
 
 class Parcels(Resource, Model):
@@ -90,34 +90,34 @@ class Parcels(Resource, Model):
                 if 'user_id' in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide user_id'}, 400)
+                    return {'result': 'failed', 'message': 'please provide user_id'}, 400
                 if 'parcel_type' in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide parcel_type'}, 400)
+                    return {'result': 'failed', 'message': 'please provide parcel_type'}, 400
                 if 'Dest' in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide destination'}, 400)
+                    return {'result': 'failed', 'message': 'please provide destination'}, 400
                 if 'recepient_number' in payload:
                     pass
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please provide the recepient number'}, 400)
+                    return {'result': 'failed', 'message': 'please provide the recepient number'}, 400
                 if payload['user_id'] or payload['parcel_type'] or payload['Dest'] or payload['recepient_number']:
                     parcel = Model()
                     data = parcel.add_parcel(payload)
-                    return jsonify({'result': 'added', 'message': 'Successfully added', 'parcel': data}, 201)
+                    return {'result': 'added', 'message': 'Successfully added', 'parcel': data}, 201
                 else:
-                    return jsonify({'result': 'failed', 'message': 'please read the api document'}, 400)
+                    return {'result': 'failed', 'message': 'please read the api document'}, 400
             else:
-                return jsonify({'result': 'failed', 'message': 'please provide a valid json data refer API doc'}, 400)
+                return {'result': 'failed', 'message': 'please provide a valid json data refer API doc'}, 400
         else:
-            return jsonify({'result': 'failed', 'message': 'please provide a json data'}, 400)
+            return {'result': 'failed', 'message': 'please provide a json data'}, 400
 
     def get(self):
         parcel = Model()
         parcels = parcel.get_all_parcels()
-        return jsonify({'result': 'success', 'parcels': parcels}, 200)
+        return {'result': 'success', 'parcels': parcels}, 200
 
 
 class GetOneParcel(Resource, Model):
@@ -127,6 +127,6 @@ class GetOneParcel(Resource, Model):
         parcels = Model()
         parcel = parcels.get_parcel(order_no)
         if parcel == 0:
-            return jsonify({'result': 'failed', 'message': 'not found'}, 404)
+            return {'result': 'failed', 'message': 'not found'}, 404
         else:
-            return jsonify({'result': 'success', 'parcel': parcel}, 200)
+            return {'result': 'success', 'parcel': parcel}, 200
