@@ -1,23 +1,15 @@
 import base64
 import random
 
-db = [
-    {
-        "user": [],
-        "parcel": [],
-        "tokens": []
-    }
-    ]
 users = []
 parcels = []
 
 
-class Model:
+class UserModel:
     """This is the model class to manipulate data"""
     def __init__(self):
         """initialzation for our data"""
         self.users = users
-        self.parcels = parcels
 
     def add_user(self, data):
         """this adds users to our dict"""
@@ -57,6 +49,14 @@ class Model:
                 i = i + 1
         payload = {"status": 0}
         return payload
+
+
+class ParcelModel:
+    """"This is the class parcel model for testing model"""
+
+    def __init__(self):
+        """initialzation for our data"""
+        self.parcels = parcels
 
     def add_parcel(self, data):
         """This model adds parcels to our datastructure"""
