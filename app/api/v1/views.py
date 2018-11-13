@@ -17,12 +17,11 @@ class Users(Resource):
         # check if payload is empty
         if not payload:
             return {'status': 'failed', 'message': 'provide all fields'}, 400
-        if payload:
-            if not (payload['email'] or payload['name'] or payload['password'] or payload['role']):
-                return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
-            user = UserModel()
-            data = user.add_user(payload)
-            return {'status': 'added', 'message': 'Successfully signed up', 'data': data}, 201
+        if not (payload['email'] or payload['name'] or payload['password'] or payload['role']):
+            return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
+        user = UserModel()
+        data = user.add_user(payload)
+        return {'status': 'added', 'message': 'Successfully signed up', 'data': data}, 201
 
 
 class Login(Resource):
