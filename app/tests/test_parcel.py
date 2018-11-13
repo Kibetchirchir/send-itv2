@@ -100,5 +100,5 @@ class ParcelTestCase(unittest.TestCase):
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 201)
         res = self.client().get("api/v1/users/4/parcels")
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 202)
         self.assertIn("254715428709", str(res.data))
