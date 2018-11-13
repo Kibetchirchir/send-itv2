@@ -9,6 +9,7 @@ class ParcelTestCase(BaseClass):
         res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
         self.assertIn("order_no", str(res.data))
+
     def test_user_add_parcel_bad_Request(self):
         """Test API for bad request"""
         parcel = {"user_id": 1,
