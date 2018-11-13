@@ -37,7 +37,7 @@ class ParcelTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertIn("destination", str(res.data))
 
-    def test_admin_all_parcels(self):
+    def test_get_all_parcels(self):
         """Test API for getting all parcels (GET_REQUEST)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
