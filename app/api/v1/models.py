@@ -84,7 +84,7 @@ class ParcelModel:
             if parcel['order_no'] == str(order_id):
                 if parcel['status'] == 'delivered':
                     return parcel
-                parcel['status'] = 'cancelled'
+                parcel['status'] = 'pending'
                 return parcel
 
     def get_user_parcels(self, user_id):

@@ -98,7 +98,7 @@ class CancelParcel(Resource):
             return {'status': 'failed', 'message': 'order number not found'}, 404
         if cancel['status'] == 'delivered':
             return {'status': 'failed', 'message': 'Already delivered', "data": cancel}, 403
-        if cancel['status'] == 'cancelled':
+        if cancel['status'] == 'pending':
             return {'status': 'success', 'message': 'processing', "data": cancel}, 202
 
 
