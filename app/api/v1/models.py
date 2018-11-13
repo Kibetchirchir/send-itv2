@@ -8,18 +8,20 @@ db = [
         "tokens": []
     }
     ]
-parcel = []
+users = []
+parcels = []
 
 
 class Model:
     """This is the model class to manipulate data"""
     def __init__(self):
         """initialzation for our data"""
-        self.db = list(db)
+        self.users = users
+        self.parcels = parcels
 
     def add_user(self, data):
         """this adds users to our dict"""
-        user = self.db[0]['user']
+        user = self.users
         user_id = len(user) + 1
         user_name = data['name']
         user_email = data['email']
@@ -37,7 +39,7 @@ class Model:
 
     def get_user(self, email):
         """This gets a specific user values"""
-        user = self.db[0]['user']
+        user = self.users
         array_len = len(user) - 1
         # The array to loop
         i = 0
@@ -58,7 +60,7 @@ class Model:
 
     def add_parcel(self, data):
         """This model adds parcels to our datastructure"""
-        parcel = self.db[0]['parcel']
+        parcel = self.parcels
         order_number = random.randint(1000, 9999)
         parcel_type = data['parcel_type']
         user_id = data['user_id']
@@ -76,11 +78,11 @@ class Model:
         return payload
 
     def get_all_parcels(self):
-        parcels = self.db[0]['parcel']
+        parcels = self.parcels
         return parcels
 
     def get_parcel(self, order_id):
-        parcel = self.db[0]['parcel']
+        parcel = self.parcels
         array_length = len(parcel) - 1
         i = 0  # this is the value to append to my array
         while i <= array_length:
@@ -100,7 +102,7 @@ class Model:
         return 0
 
     def cancel_parcel(self, order_id):
-        parcel = self.db[0]['parcel']
+        parcel = self.parcels
         array_length = len(parcel) - 1
         i = 0  # this is the value to append to my array
         while i <= array_length:
@@ -120,7 +122,7 @@ class Model:
         return 0
 
     def get_user_parcels(self, user_id):
-        parcel = self.db[0]['parcel']
+        parcel = self.parcels
         array_length = len(parcel) - 1
         i = 0  # this is the value to append to my array
         while i <= array_length:
