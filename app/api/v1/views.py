@@ -102,7 +102,7 @@ class CancelParcel(Resource):
             return {'status': 'success', 'message': 'processing', "data": cancel}, 202
 
 
-class FetchAllParcel(Resource):
+class FetchParcelsByUsers(Resource):
     """This class gets parcels for a specific user"""
     def get(self, user_id):
         parcel = ParcelModel()
