@@ -1,25 +1,12 @@
-import unittest
-import os
 import json
-from flask import jsonify
+from . import Baseclass
 
 
 from app import create_app
 
 
-class ParcelTestCase(unittest.TestCase):
+class ParcelTestCase(Baseclass):
     """This test case tets the parcel test cases"""
-    def setUp(self):
-        """Define test variables and initialize app."""
-        self.app = create_app(config_name="testing")
-        self.client = self.app.test_client
-        self.parcel = {"user_id": 1,
-                       "parcel_type": "letter",
-                       "recepient_number": "254715428709",
-                       "Dest": "Moi_avenue",
-                       "status": "on_transit"
-                       }
-
     def test_user_add_parcel(self):
         """Test API if it adds a parcel(POST)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
@@ -40,7 +27,6 @@ class ParcelTestCase(unittest.TestCase):
     def test_get_all_parcels(self):
         """Test API for getting all parcels (GET_REQUEST)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
-        self.assertEqual(res.status_code, 201)
         res = self.client().get("api/v1/parcels")
         self.assertEqual(res.status_code, 200)
         self.assertIn("254715428709", str(res.data))
@@ -48,7 +34,6 @@ class ParcelTestCase(unittest.TestCase):
     def test_specific_parcels(self):
         """Test API for getting a specific parcel using the order number"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
-        self.assertEqual(res.status_code, 201)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']
         order_no = str(order_no)
@@ -65,7 +50,6 @@ class ParcelTestCase(unittest.TestCase):
     def test_user_can_cancel(self):
         """Test API for cancelling parcel(PUT method)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
-        self.assertEqual(res.status_code, 201)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']
         order_no = str(order_no)
@@ -82,7 +66,6 @@ class ParcelTestCase(unittest.TestCase):
                   "status": "delivered"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
-        self.assertEqual(res.status_code, 201)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']
         order_no = str(order_no)
@@ -99,7 +82,6 @@ class ParcelTestCase(unittest.TestCase):
                   "status": "delivered"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
-        self.assertEqual(res.status_code, 201)
         res = self.client().get("api/v1/users/4/parcels")
         self.assertEqual(res.status_code, 202)
         self.assertIn("254715428709", str(res.data))

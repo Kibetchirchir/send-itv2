@@ -29,7 +29,6 @@ class UserTestCase(unittest.TestCase):
                "password": "kevin12345",
                "page": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
-        self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
         self.assertIn("redirect to user", str(res.data))
@@ -40,7 +39,6 @@ class UserTestCase(unittest.TestCase):
                 "password": "admin",
                 "page": "admin"}
         res = self.client().post("api/v1/signup", json=self.admin)
-        self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
         self.assertIn("redirect to admin", str(res.data))
@@ -51,7 +49,6 @@ class UserTestCase(unittest.TestCase):
                 "password": "kevin",
                 "page": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
-        self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 401)
         self.assertIn("email not found", str(res.data))
@@ -62,7 +59,6 @@ class UserTestCase(unittest.TestCase):
                 "password": "kevin12345",
                 "page": "admin"}
         res = self.client().post("api/v1/signup", json=self.user)
-        self.assertEqual(res.status_code, 201)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 403)
         self.assertIn("you are not an admin", str(res.data))
