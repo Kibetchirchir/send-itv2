@@ -1,4 +1,5 @@
 import random
+import uuid
 
 users = []
 parcels = []
@@ -13,7 +14,7 @@ class UserModel:
     def add_user(self, data):
         """this adds users to our dict"""
         user = self.users
-        user_id = len(user) + 1
+        user_id = uuid.uuid4()
         user_name = data['name']
         user_email = data['email']
         user_password = data['password']
@@ -46,7 +47,7 @@ class ParcelModel:
     def add_parcel(self, data):
         """This method adds parcels to our parcels"""
         parcel = self.parcels
-        order_number = random.randint(1000, 9999)
+        order_number = str(uuid.uuid4())
         parcel_type = data['parcel_type']
         user_id = data['user_id']
         dest = data['Dest']
