@@ -14,8 +14,8 @@ api = Api(v1)
 api.add_resource(Users, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Parcels, '/parcels')
-api.add_resource(GetOneParcel, '/parcels/<int:order_no>')
-api.add_resource(CancelParcel, '/parcels/<int:order_no>/cancel')
+api.add_resource(GetOneParcel, '/parcels/<order_no>')
+api.add_resource(CancelParcel, '/parcels/<uuid:order_no>/cancel')
 api.add_resource(FetchAllParcel, '/users/<user_id>/parcels')
 
 

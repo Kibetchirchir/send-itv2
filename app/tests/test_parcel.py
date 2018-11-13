@@ -1,6 +1,7 @@
 import unittest
 import os
 import json
+from flask import jsonify
 
 
 from app import create_app

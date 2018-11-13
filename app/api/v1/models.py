@@ -14,7 +14,7 @@ class UserModel:
     def add_user(self, data):
         """this adds users to our dict"""
         user = self.users
-        user_id = uuid.uuid4()
+        user_id = str(uuid.uuid1())
         user_name = data['name']
         user_email = data['email']
         user_password = data['password']
@@ -47,7 +47,7 @@ class ParcelModel:
     def add_parcel(self, data):
         """This method adds parcels to our parcels"""
         parcel = self.parcels
-        order_number = str(uuid.uuid4())
+        order_number = str(uuid.uuid1())
         parcel_type = data['parcel_type']
         user_id = data['user_id']
         dest = data['Dest']
@@ -70,16 +70,18 @@ class ParcelModel:
 
     def get_parcel(self, order_id):
         """This method gets a specific parcel interms of order_id"""
-        parcel = self.parcels
+        parcels = self.parcels
         for parcel in parcels:
-            if parcel['order_no'] == order_id:
+            parcel_order_no = parcel['order_no']  # to change to string for comparison
+            # order_id = str(order_id)
+            if parcel_order_no == order_id:
                 return parcel
 
     def cancel_parcel(self, order_id):
         """This method cancels a parcel that has not been delivered"""
         parcels = self.parcels
         for parcel in parcels:
-            if parcel['order_no'] == order_id:
+            if parcel['order_no'] == str(order_id):
                 if parcel['status'] == 'delivered':
                     return parcel
                 parcel['status'] = 'cancelled'

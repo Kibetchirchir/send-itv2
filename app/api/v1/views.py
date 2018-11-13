@@ -1,5 +1,5 @@
 """This is the view for sendit application"""
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from flask_restplus import Api, Resource
 from .models import UserModel
 from .models import ParcelModel
@@ -83,8 +83,10 @@ class GetOneParcel(Resource):
         parcels = ParcelModel()
         parcel = parcels.get_parcel(order_no)
         if not parcel:
-            return jsonify({'status': 'failed', 'message': 'not found'}), 404
-        return {'status': 'success', 'parcel': parcel}, 200
+            data = {'status': 'failed', 'message': 'not found'}
+            return make_response(jsonify(data), 404)
+        data = {'status': 'success', 'parcel': parcel}
+        return make_response(jsonify(data), 200)
 
 
 class CancelParcel(Resource):
