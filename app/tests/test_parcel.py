@@ -1,18 +1,14 @@
 import json
-from . import Baseclass
+from . import BaseClass
 
 
-from app import create_app
-
-
-class ParcelTestCase(Baseclass):
+class ParcelTestCase(BaseClass):
     """This test case tets the parcel test cases"""
     def test_user_add_parcel(self):
         """Test API if it adds a parcel(POST)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
         self.assertEqual(res.status_code, 201)
         self.assertIn("order_no", str(res.data))
-
     def test_user_add_parcel_bad_Request(self):
         """Test API for bad request"""
         parcel = {"user_id": 1,
@@ -21,14 +17,12 @@ class ParcelTestCase(Baseclass):
                   "status": "on_transit"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
-        self.assertEqual(res.status_code, 400)
         self.assertIn("destination", str(res.data))
 
     def test_get_all_parcels(self):
         """Test API for getting all parcels (GET_REQUEST)"""
         res = self.client().post("api/v1/parcels", json=self.parcel)
         res = self.client().get("api/v1/parcels")
-        self.assertEqual(res.status_code, 200)
         self.assertIn("254715428709", str(res.data))
 
     def test_specific_parcels(self):

@@ -1,28 +1,8 @@
-import unittest
-import os
+from . import BaseClass
 
 
-from app import create_app
-
-
-class UserTestCase(unittest.TestCase):
+class UserTestCase(BaseClass):
     """This class represents the user test case"""
-
-    def setUp(self):
-        """Define test variables and initialize app."""
-        self.app = create_app(config_name="testing")
-        self.client = self.app.test_client
-        self.user = {"name": "chirchir Kibet",
-                     "email": "langatchirchir@gmail.com",
-                     "role": "user",
-                     "password": "kevin12345"
-                     }
-        self.admin = {"name": "admin",
-                      "email": "admin@gmail.com",
-                      "role": "admin",
-                      "password": "admin"
-                     }
-
     def test_user_login_successful(self):
         """Test API user can login(POST request"""
         data ={"email":"langatchirchir@gmail.com",
