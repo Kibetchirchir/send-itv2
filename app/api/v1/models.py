@@ -31,24 +31,10 @@ class UserModel:
 
     def get_user(self, email):
         """This gets a specific user values"""
-        user = self.users
-        array_len = len(user) - 1
-        # The array to loop
-        i = 0
-        while i <= array_len:
-            if user[i]['email'] == email:
-                name = user[i]['email']
-                role = user[i]['role']
-                password = user[i]['password']
-                payload = {'name' : name,
-                           "role": role,
-                           "password": password,
-                           "status": 1}
-                return payload
-            else:
-                i = i + 1
-        payload = {"status": 0}
-        return payload
+        users = self.users
+        for user in users:
+            if user['email'] == email:
+                return user
 
 
 class ParcelModel:
@@ -83,23 +69,27 @@ class ParcelModel:
 
     def get_parcel(self, order_id):
         parcel = self.parcels
-        array_length = len(parcel) - 1
-        i = 0  # this is the value to append to my array
-        while i <= array_length:
-            if parcel[i]['order_no'] == order_id:
-                parcel_type = parcel[i]['parcel_type']
-                user_id = parcel[i]['user_id']
-                dest = parcel[i]['dest']
-                recepient_no = parcel[i]['recepient_no']
-                parcel = {"parcel_type": parcel_type,
-                          "user_id": user_id,
-                          "destination": dest,
-                          "recepient_no": recepient_no
-                          }
+        for parcel in parcels:
+            if parcel['order_no']:
                 return parcel
-            else:
-                i = i + 1
-        return 0
+
+        # array_length = len(parcel) - 1
+        # i = 0  # this is the value to append to my array
+        # while i <= array_length:
+        #     if parcel[i]['order_no'] == order_id:
+        #         parcel_type = parcel[i]['parcel_type']
+        #         user_id = parcel[i]['user_id']
+        #         dest = parcel[i]['dest']
+        #         recepient_no = parcel[i]['recepient_no']
+        #         parcel = {"parcel_type": parcel_type,
+        #                   "user_id": user_id,
+        #                   "destination": dest,
+        #                   "recepient_no": recepient_no
+        #                   }
+        #         return parcel
+        #     else:
+        #         i = i + 1
+        # return 0
 
     def cancel_parcel(self, order_id):
         parcel = self.parcels
