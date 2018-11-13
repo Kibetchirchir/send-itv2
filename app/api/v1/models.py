@@ -45,7 +45,7 @@ class ParcelModel:
         self.parcels = parcels
 
     def add_parcel(self, data):
-        """This model adds parcels to our datastructure"""
+        """This method adds parcels to our parcels"""
         parcel = self.parcels
         order_number = random.randint(1000, 9999)
         parcel_type = data['parcel_type']
@@ -64,62 +64,35 @@ class ParcelModel:
         return payload
 
     def get_all_parcels(self):
+        """This method gets all parcels from our parcels"""
         parcels = self.parcels
         return parcels
 
     def get_parcel(self, order_id):
+        """This method gets a specific parcel interms of order_id"""
         parcel = self.parcels
         for parcel in parcels:
-            if parcel['order_no']:
+            if parcel['order_no'] == order_id:
                 return parcel
 
-        # array_length = len(parcel) - 1
-        # i = 0  # this is the value to append to my array
-        # while i <= array_length:
-        #     if parcel[i]['order_no'] == order_id:
-        #         parcel_type = parcel[i]['parcel_type']
-        #         user_id = parcel[i]['user_id']
-        #         dest = parcel[i]['dest']
-        #         recepient_no = parcel[i]['recepient_no']
-        #         parcel = {"parcel_type": parcel_type,
-        #                   "user_id": user_id,
-        #                   "destination": dest,
-        #                   "recepient_no": recepient_no
-        #                   }
-        #         return parcel
-        #     else:
-        #         i = i + 1
-        # return 0
-
     def cancel_parcel(self, order_id):
-        parcel = self.parcels
-        array_length = len(parcel) - 1
-        i = 0  # this is the value to append to my array
-        while i <= array_length:
-            if parcel[i]['order_no'] == order_id:
-                parcel_type = parcel[i]['parcel_type']
-                user_id = parcel[i]['user_id']
-                dest = parcel[i]['dest']
-                recepient_no = parcel[i]['recepient_no']
-                status = parcel[i]['status']
-                if status == 'on_transit':
-                    parcel[i]['status'] = 'cancel'
-                    return parcel[i]['status']
-                else:
-                    return parcel[i]['status']
-            else:
-                i = i + 1
-        return 0
+        """This method cancels a parcel that has not been delivered"""
+        parcels = self.parcels
+        for parcel in parcels:
+            if parcel['order_no'] == order_id:
+                if parcel['status'] == 'delivered':
+                    return parcel
+                parcel['status'] = 'cancelled'
+                return parcel
 
     def get_user_parcels(self, user_id):
-        parcel = self.parcels
-        array_length = len(parcel) - 1
-        i = 0  # this is the value to append to my array
-        while i <= array_length:
-            if parcel[i]["user_id"] == user_id:
-                parcel.append(parcel[i])
-                i = i + 1
-            else:
-                i = i + 1
-        return parcel
-
+        """This method gets all parcels by a specific user"""
+        parcels = self.parcels
+        count = 0 # this is for counting how many parcels are there
+        user_parcels = []
+        for parcel in parcels:
+            parcel_user_id = str(parcel['user_id'])
+            if parcel_user_id == user_id:
+                user_parcels.append(parcel)
+                count = count + 1
+        return {"data": user_parcels, "parcels": count}
