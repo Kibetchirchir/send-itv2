@@ -17,7 +17,7 @@ class Users(Resource):
         # check if payload is empty
         if not payload:
             return {'status': 'failed', 'message': 'provide all fields'}, 400
-        if not (payload['email'] or payload['name'] or payload['password'] or payload['role']):
+        if not all(key in payload for key in ['email', 'password', 'role', 'password']):
             return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
         user = UserModel()
         data = user.add_user(payload)
@@ -30,21 +30,24 @@ class Login(Resource):
         """The post request for login"""
         payload = api.payload
         # Get the variables you'll use
+        if not payload:
+            return {'status': 'failed', 'message': 'provide all fields'}, 400
+        if not all(key in payload for key in ['email', 'password', 'role']):
+            return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
         email = payload['email']
-        page = payload['page']
+        role_provided = payload['role']
         password_given = payload['password']
         user = UserModel()
         data = user.get_user(email)
-
-        if not data: # returned from our model get_user
+        if not data:  # returned from our model get_user
             return {'status': 'failed', 'message': 'email not found'}, 401
         role = data['role']
         password = data['password']
         if not password == password_given:
             return {'status': 'failed', 'message': 'wrong password'}, 401
-        if page == 'admin' and role == 'user':
+        if role_provided == 'admin' and role == 'user':
             return {'status': 'failed', 'message': 'you are not an admin'}, 403
-        return {'status': 'success', 'message': 'redirect to ' + page}, 200
+        return {'status': 'success', 'message': 'redirect to ' + role_provided}, 200
 
 
 class Parcels(Resource):

@@ -7,7 +7,7 @@ class UserTestCase(BaseClass):
         """Test API user can login(POST request"""
         data ={"email":"langatchirchir@gmail.com",
                "password": "kevin12345",
-               "page": "user"}
+               "role": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
@@ -17,7 +17,7 @@ class UserTestCase(BaseClass):
         """Test API admin can login(POST request)"""
         data = {"email": "admin@gmail.com",
                 "password": "admin",
-                "page": "admin"}
+                "role": "admin"}
         res = self.client().post("api/v1/signup", json=self.admin)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
@@ -27,7 +27,7 @@ class UserTestCase(BaseClass):
         """Test API user cannot login with wrong login credentials"""
         data = {"email": "langatchirhir@gmail.com",
                 "password": "kevin",
-                "page": "user"}
+                "role": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 401)
@@ -37,8 +37,17 @@ class UserTestCase(BaseClass):
         """Test API if user can access admin page"""
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345",
-                "page": "admin"}
+                "role": "admin"}
         res = self.client().post("api/v1/signup", json=self.user)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 403)
         self.assertIn("you are not an admin", str(res.data))
+
+    def test_bad_request_login(self):
+        """Test API if user can access admin page"""
+        data = {"email": "langatchirchir@gmail.com",
+                "password": "kevin12345"}
+        res = self.client().post("api/v1/signup", json=self.user)
+        res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("failed", str(res.data))
