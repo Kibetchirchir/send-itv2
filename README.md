@@ -2,7 +2,7 @@
 
 
 
-![Travis (.org)](https://travis-ci.org/Kibetchirchir/SENDIT.svg?branch=ch-travisci-intergration-161804694)          [![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-it/badge.svg?branch=ft-specific-deliveries-161743205)](https://coveralls.io/github/Kibetchirchir/send-it?branch=ft-specific-deliveries-161743205)  <a href="https://codeclimate.com/github/Kibetchirchir/send-it/maintainability"><img src="https://api.codeclimate.com/v1/badges/0700db556fe2d04d93fc/maintainability" /></a>   [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Build Status](https://travis-ci.org/Kibetchirchir/send-it.svg?branch=ft-specific-deliveries-161743205)](https://travis-ci.org/Kibetchirchir/send-it)[![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-it/badge.svg?branch=ft-specific-deliveries-161743205)](https://coveralls.io/github/Kibetchirchir/send-it?branch=ft-specific-deliveries-161743205)  <a href="https://codeclimate.com/github/Kibetchirchir/send-it/maintainability"><img src="https://api.codeclimate.com/v1/badges/0700db556fe2d04d93fc/maintainability" /></a>   [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 
 #### This is an application that allows user to send parcel online
