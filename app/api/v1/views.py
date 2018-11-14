@@ -3,7 +3,7 @@ from flask import Flask, jsonify, make_response
 from flask_restplus import Api, Resource
 from .models import UserModel
 from .models import ParcelModel
-
+from .models import CheckRequired
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,10 +15,10 @@ class Users(Resource):
         """The post request for the class"""
         payload = api.payload
         # check if payload is empty
-        if not payload:
-            return {'status': 'failed', 'message': 'provide all fields'}, 400
-        if not all(key in payload for key in ['email', 'password', 'role', 'password']):
-            return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
+        check = CheckRequired()
+        checked_payload = check.check_payload_signup(payload)
+        if not checked_payload:
+            return {'status': 'failed', 'message': 'bad request refer to API document or provide all fields'}, 400
         user = UserModel()
         data = user.add_user(payload)
         return {'status': 'added', 'message': 'Successfully signed up', 'data': data}, 201

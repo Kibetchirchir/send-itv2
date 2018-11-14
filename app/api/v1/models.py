@@ -98,3 +98,23 @@ class ParcelModel:
                 user_parcels.append(parcel)
                 count = count + 1
         return {"data": user_parcels, "parcels": count}
+
+
+class CheckRequired:
+    """This class check the required fields are filled"""
+    def check_payload_signup(self, payload):
+        """To check if payload is not empty and all values are provided"""
+        if payload:
+            if all(key in payload for key in ['email', 'password', 'role', 'password']):
+                values = CheckRequired()
+                values_return = values.check_data_payload(payload)
+                if values_return:
+                    return payload
+
+    def check_data_payload(self, payload):
+        """To check all are not empty"""
+        if not any(value == "" for value in payload.values()):
+            return payload
+
+
+
