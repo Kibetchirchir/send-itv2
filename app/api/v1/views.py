@@ -15,8 +15,8 @@ class Users(Resource):
         """The post request for the class"""
         payload = api.payload
         # check if payload is empty
-        check = CheckRequired()
-        checked_payload = check.check_payload_signup(payload)
+        check = CheckRequired(payload)
+        checked_payload = check.check_payload_signup()
         if not checked_payload:
             return {'status': 'failed', 'message': 'bad request refer to API document or provide all fields'}, 400
         user = UserModel()
@@ -57,14 +57,12 @@ class Parcels(Resource):
         if not api.payload:
             return {'status': 'failed', 'message': 'please provide a json data'}, 400
         payload = api.payload
-        if 'user_id' not in payload:
-            return {'status': 'failed', 'message': 'please provide user_id'}, 400
-        if 'parcel_type' not in payload:
-            return {'status': 'failed', 'message': 'please provide parcel_type'}, 400
-        if 'Dest' not in payload:
-            return {'status': 'failed', 'message': 'please provide destination'}, 400
-        if 'recepient_number' not in payload:
-            return {'status': 'failed', 'message': 'please provide receipt_number'}, 400
+        if not all(key in payload for key in ['user_id', 'parcel_type', 'Dest', 'status']):
+            return {'status': 'failed', 'message': 'bad request all required fields'}, 400
+        check_empty = CheckRequired(payload)
+        checked_empty = check_empty.check_data_payload()
+        if not checked_empty:
+            return {'status': 'failed', 'message': 'bad request no empty value allowed'}, 400
         parcel = ParcelModel()
         data = parcel.add_parcel(payload)
         return {'status': 'added', 'message': 'Successfully added', 'parcel': data}, 201

@@ -18,7 +18,8 @@ class ParcelTestCase(BaseClass):
                   "status": "on_transit"
                   }
         res = self.client().post("api/v1/parcels", json=parcel)
-        self.assertIn("destination", str(res.data))
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("bad request", str(res.data))
 
     def test_get_all_parcels(self):
         """Test API for getting all parcels (GET_REQUEST)"""
