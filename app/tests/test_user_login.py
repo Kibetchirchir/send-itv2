@@ -25,7 +25,7 @@ class UserTestCase(BaseClass):
 
     def test_user_login_failed(self):
         """Test API user cannot login with wrong login credentials"""
-        data = {"email": "langatchirhir@gmail.com",
+        data = {"email": "lanchirhir@gmail.com",
                 "password": "kevin",
                 "role": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
@@ -49,5 +49,11 @@ class UserTestCase(BaseClass):
                 "password": "kevin12345"}
         res = self.client().post("api/v1/signup", json=self.user)
         res = self.client().post("api/v1/login", json=data)
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("failed", str(res.data))
+
+    def test_null_acceptable(self):
+        """send a non json object to the api"""
+        res = self.client().post("api/v1/login", data=self.user)
         self.assertEqual(res.status_code, 400)
         self.assertIn("failed", str(res.data))
