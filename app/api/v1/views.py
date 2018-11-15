@@ -42,7 +42,7 @@ class Login(Resource):
         if not payload:
             return {'status': 'failed', 'message': 'provide all fields'}, 400
         if not all(key in payload for key in ['email', 'password', 'role']):
-            return {'status': 'failed', 'message': 'bad request refer to API document'}, 400
+            return {'status': 'failed', 'message': 'bad request please provide all fields'}, 400
         email = payload['email']
         role_provided = payload['role']
         password_given = payload['password']
