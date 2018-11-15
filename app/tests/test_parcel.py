@@ -15,8 +15,7 @@ class ParcelTestCase(BaseClass):
         parcel = {"user_id": 1,
                   "parcel_type": "letter",
                   "recepient_number": "254715428709",
-                  "status": "on_transit"
-                  }
+                  "status": "on_transit"}
         res = self.client().post("api/v1/parcels", json=parcel)
         self.assertEqual(res.status_code, 400)
         self.assertIn("bad request", str(res.data))
@@ -59,8 +58,7 @@ class ParcelTestCase(BaseClass):
                   "parcel_type": "letter",
                   "recepient_number": "254715428709",
                   "Dest": "Moi_avenue",
-                  "status": "delivered"
-                  }
+                  "status": "delivered"}
         res = self.client().post("api/v1/parcels", json=parcel)
         data = json.loads(res.get_data(as_text=True))
         order_no = data['parcel']['order_no']
@@ -75,8 +73,7 @@ class ParcelTestCase(BaseClass):
                   "parcel_type": "letter",
                   "recepient_number": "254715428709",
                   "Dest": "Moi_avenue",
-                  "status": "delivered"
-                  }
+                  "status": "delivered"}
         res = self.client().post("api/v1/parcels", json=parcel)
         res = self.client().get("api/v1/users/4/parcels")
         self.assertEqual(res.status_code, 202)

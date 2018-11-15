@@ -5,13 +5,13 @@ class UserTestCase(BaseClass):
     """This class represents the user test case"""
     def test_user_login_successful(self):
         """Test API user can login(POST request"""
-        data ={"email":"langatchirchir@gmail.com",
-               "password": "kevin12345",
-               "role": "user"}
+        data = {"email": "langatchirchir@gmail.com",
+                "password": "kevin12345",
+                "role": "user"}
         res = self.client().post("api/v1/signup", json=self.user)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
-        self.assertIn("redirect to user", str(res.data))
+        self.assertIn("user", str(res.data))
 
     def test_admin_login_success(self):
         """Test API admin can login(POST request)"""
@@ -21,7 +21,7 @@ class UserTestCase(BaseClass):
         res = self.client().post("api/v1/signup", json=self.admin)
         res = self.client().post("api/v1/login", json=data)
         self.assertEqual(res.status_code, 200)
-        self.assertIn("redirect to admin", str(res.data))
+        self.assertIn("admin", str(res.data))
 
     def test_user_login_failed(self):
         """Test API user cannot login with wrong login credentials"""

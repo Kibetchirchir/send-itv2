@@ -16,17 +16,14 @@ class BaseClass(unittest.TestCase):
         self.user = {"name": "chirchir Kibet",
                      "email": "langatchirchir@gmail.com",
                      "role": "user",
-                     "password": "kevin12345"
-                     }
+                     "password": "kevin12345"}
         self.admin = {"name": "admin",
                       "email": "admin@gmail.com",
                       "role": "admin",
-                      "password": "admin"
-                      }
+                      "password": "admin"}
         self.parcel = {"user_id": 1,
                        "parcel_type": "letter",
                        "recepient_number": "254715428709",
                        "Dest": "Moi_avenue",
-                       "status": "on_transit"
-                       }
+                       "status": "on_transit"}
 
