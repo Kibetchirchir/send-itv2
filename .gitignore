@@ -1,0 +1,9 @@
+.cache/*
+.pytest_cache/*
+venv/
+.coverage
+instance/
+__pycache__/
+*.py[cod]
+.travis.yml
+.idea
