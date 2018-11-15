@@ -60,7 +60,7 @@ class Login(Resource):
                    "role": role,
                    "user_id": data['id']
                    }
-        return {'status': 'success', 'message': 'Successful logged in', 'date': payload}, 200
+        return {'status': 'success', 'message': 'Successful logged in', 'data': payload}, 200
 
 
 class Parcels(Resource):
