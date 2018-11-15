@@ -23,7 +23,7 @@
  8 if on localhost the app will run on `127.0.0.1:5000`
  9. @Client :smiley: The app is now up and running :shipit:
  
- ## how to test using pytest
+ ## How to test using pytest
  1. cd to the root of the project
  2. activate the virtual enviroment
  3. use `pytest ` to test
