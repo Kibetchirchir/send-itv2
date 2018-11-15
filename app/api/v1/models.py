@@ -126,4 +126,5 @@ class CheckRequired:
         """To check for email"""
         email = self.payload['email']
         if any(value == "@" for value in email):
-            return self.payload
+            if any(value == "." for value in email):
+                return self.payload
