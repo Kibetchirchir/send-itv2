@@ -23,7 +23,12 @@
  8 if on localhost the app will run on `127.0.0.1:5000`
  9. @Client :smiley: The app is now up and running :shipit:
 
- 
+ ## How to test
+ 1. Open the link below (Postman)
+ 2. On postman you will see the required fields
+ 3. Also you will see the endpoints
+ 5. Presss send for each endpoint amd wait for response
+  
  
  ## Endpoints
  

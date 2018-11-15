@@ -1,4 +1,3 @@
-import random
 import uuid
 
 users = []
@@ -107,8 +106,9 @@ class CheckRequired:
 
     def check_payload_signup(self):
         """To check if payload is not empty and all values are provided"""
-        if self.payload:
-            if all(key in self.payload for key in ['email', 'password', 'role', 'name']):
+        if not self.payload:
+            return False
+        if all(key in self.payload for key in ['email', 'password', 'role', 'name']):
                 values = CheckRequired(self.payload)
                 values_return = values.check_data_payload()
                 if values_return:
@@ -117,4 +117,10 @@ class CheckRequired:
     def check_data_payload(self):
         """To check all are not empty"""
         if not any(value == "" for value in self.payload.values()):
+            return self.payload
+
+    def check_for_email(self):
+        """To check for email"""
+        email = self.payload['email']
+        if any(value == "@" for value in email):
             return self.payload

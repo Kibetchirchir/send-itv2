@@ -19,6 +19,10 @@ class Users(Resource):
         checked_payload = check.check_payload_signup()
         if not checked_payload:
             return {'status': 'failed', 'message': 'bad request refer to API document or provide all fields'}, 400
+        verifier = CheckRequired(payload)
+        email_checked = verifier.check_for_email()
+        if not email_checked:
+            return {'status': 'failed', 'message': 'bad request check your email'}, 400
         user = UserModel()
         data = user.add_user(payload)
         return {'status': 'added', 'message': 'Successfully signed up', 'data': data}, 201
@@ -47,7 +51,11 @@ class Login(Resource):
             return {'status': 'failed', 'message': 'wrong password'}, 401
         if role_provided == 'admin' and role == 'user':
             return {'status': 'failed', 'message': 'you are not an admin'}, 403
-        return {'status': 'success', 'message': 'redirect to ' + role_provided}, 200
+        payload = {"name": data['name'],
+                   "role": role,
+                   "user_id": data['id']
+                   }
+        return {'status': 'success', 'message': 'Successful logged in', 'date': payload}, 200
 
 
 class Parcels(Resource):
