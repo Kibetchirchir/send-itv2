@@ -23,6 +23,11 @@ class Users(Resource):
         email_checked = verifier.check_for_email()
         if not email_checked:
             return {'status': 'failed', 'message': 'bad request check your email'}, 400
+        email = payload['email']
+        user = UserModel()
+        data = user.get_user(email)
+        if data:
+            return {'status': 'failed', 'message': 'conflict email already used'}, 409
         user = UserModel()
         data = user.add_user(payload)
         return {'status': 'added', 'message': 'Successfully signed up', 'data': data}, 201
