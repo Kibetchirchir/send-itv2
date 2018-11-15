@@ -22,8 +22,14 @@
  7. use the command `flask run` to start your application
  8 if on localhost the app will run on `127.0.0.1:5000`
  9. @Client :smiley: The app is now up and running :shipit:
+ 
+ ## how to test using pytest
+ 1. cd to the root of the project
+ 2. activate the virtual enviroment
+ 3. use `pytest ` to test
+ 4. To check the coverage use `pytest --cov=app/` to see the coverage of the app
 
- ## How to test
+ ## How to test using postman
  1. Open the link below (Postman)
  2. On postman you will see the required fields
  3. Also you will see the endpoints
