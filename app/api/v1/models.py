@@ -1,4 +1,5 @@
 import uuid
+import datetime
 
 users = []
 parcels = []
@@ -51,13 +52,15 @@ class ParcelModel:
         user_id = data['user_id']
         dest = data['Dest']
         status = data['status']
+        timestamp = str(datetime.datetime.now())
         recepient = data['recepient_number']
         payload = {"order_no": order_number,
                    "parcel_type": parcel_type,
                    "user_id": user_id,
                    "dest": dest,
                    "recepient_no": recepient,
-                   "status": status
+                   "status": status,
+                   "ordered_date": timestamp
                    }
         parcel.append(payload)
         return payload
