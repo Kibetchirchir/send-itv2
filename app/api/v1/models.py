@@ -8,7 +8,7 @@ parcels = []
 class UserModel:
     """This is the model class to manipulate data"""
     def __init__(self):
-        """initialzation for our data"""
+        """Initialzation for our data"""
         self.users = users
 
     def add_user(self, data):
@@ -74,7 +74,8 @@ class ParcelModel:
         """This method gets a specific parcel interms of order_id"""
         parcels = self.parcels
         for parcel in parcels:
-            parcel_order_no = parcel['order_no']  # to change to string for comparison
+            # to change to string for comparison
+            parcel_order_no = parcel['order_no']
             # order_id = str(order_id)
             if parcel_order_no == order_id:
                 return parcel
@@ -92,7 +93,8 @@ class ParcelModel:
     def get_user_parcels(self, user_id):
         """This method gets all parcels by a specific user"""
         parcels = self.parcels
-        count = 0 # this is for counting how many parcels are there
+        # this is for counting how many parcels are there
+        count = 0
         user_parcels = []
         for parcel in parcels:
             parcel_user_id = str(parcel['user_id'])

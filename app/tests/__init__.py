@@ -1,7 +1,4 @@
 import unittest
-import os
-import json
-from flask import jsonify
 
 
 from app import create_app
@@ -26,4 +23,3 @@ class BaseClass(unittest.TestCase):
                        "recepient_number": "254715428709",
                        "Dest": "Moi_avenue",
                        "status": "on_transit"}
-
