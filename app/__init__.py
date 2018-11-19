@@ -1,6 +1,9 @@
 from flask import Flask, jsonify
 from instance.config import app_config
 from .api.v1 import v1
+from .db_config import create_tables
+
+create_tables()
 
 
 def create_app(config_name):
