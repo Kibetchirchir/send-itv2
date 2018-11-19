@@ -30,7 +30,6 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-instance/
 .webassets-cache
 
 profile_default/
