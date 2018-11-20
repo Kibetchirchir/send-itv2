@@ -8,12 +8,12 @@ install:
   - pip install pytest
   - pip install pytest-cov
   - pip install coveralls
+  - pip install psycopg2-binary
 
 services:
   - postgresql
 
 before_script:
-  - psql -c 'create database send_it;' -U postgres
   - psql -c 'create database send_it_test;' -U postgres
   - sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'v0k3ch!97';"
 
