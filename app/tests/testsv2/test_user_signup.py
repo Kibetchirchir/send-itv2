@@ -5,11 +5,7 @@ class UserTestCase(BaseClass):
     """This class represents the user test case"""
     def test_signup(self):
         """Test API can signup (POST request)"""
-        user = {"name": "chirchir Kibet",
-                "email": "chirchir@gmail.com",
-                "role": "user",
-                "password": "kevin12345"}
-        res = self.client().post("api/v2/auth/signup", json=user)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
         self.assertEqual(res.status_code, 201)
         self.assertIn("chirchir Kibet", str(res.data))
 
@@ -20,6 +16,7 @@ class UserTestCase(BaseClass):
         self.assertIn("provide all fields", str(res.data))
 
     def test_email_repeat(self):
+        res = self.client().post("api/v2/auth/signup", json=self.user)
         res = self.client().post("api/v2/auth/signup", json=self.user)
         self.assertEqual(res.status_code, 409)
         self.assertIn("conflict email already used", str(res.data))
