@@ -6,7 +6,7 @@ class UserTestCase(BaseClass):
     def test_signup(self):
         """Test API can signup (POST request)"""
         user = {"name": "chirchir Kibet",
-                "email": "chirchir@gmail.com",
+                "email": "chris@gmail.com",
                 "role": "user",
                 "password": "kevin12345"}
         res = self.client().post("api/v1/signup", json=user)
