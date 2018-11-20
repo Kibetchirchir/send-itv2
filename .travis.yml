@@ -16,6 +16,7 @@ services:
 before_script:
   - psql -c 'create database send_it_test;' -U postgres
   - export DB_TEST="dbname='send_it_test' host='localhost' port='5432' user='postgres' password=''"
+  - export FLASK_ENV=testing
 
 script:
   - pytest --cov=app/
