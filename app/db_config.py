@@ -1,6 +1,9 @@
 import psycopg2
+from instance.config import app_config
+import os
 
-url = "dbname='send_it' host='localhost' port='5432' user='postgres' password='v0k3ch!97'"
+env = os.getenv('FLASK_ENV')
+url = app_config[env].DB_URL
 
 
 def connection(url):
