@@ -46,3 +46,4 @@ celerybeat-schedule
 
 .venv
 venv/
+.env
