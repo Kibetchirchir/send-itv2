@@ -16,9 +16,8 @@ services:
 before_script:
   - psql -c 'create database send_it_test;' -U postgres
   - sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'v0k3ch!97';"
+  - source .env
 
-env:
-  - DB_TEST="dbname='send_it_test' host='localhost' port='5432' user='postgres' password='v0k3ch!97'"
 script:
   - pytest --cov=app/
 
