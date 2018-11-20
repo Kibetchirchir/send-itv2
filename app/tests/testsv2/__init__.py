@@ -24,6 +24,6 @@ class BaseClass(unittest.TestCase):
                        "recepient_number": "254715428709",
                        "Dest": "Moi_avenue",
                        "status": "on_transit"}
-     def tearDown(self):
-         destroy_tables()
-         
+
+    def tearDown(self):
+        destroy_tables()
