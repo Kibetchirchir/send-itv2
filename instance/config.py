@@ -13,6 +13,7 @@ class DevelopmentConfig(Config):
     """Configurations for Development."""
     DEBUG = True
     TESTING = True
+    DB_URL = os.getenv("DB_TEST")
 
 
 class TestingConfig(Config):
