@@ -20,4 +20,12 @@ class UserModel:
         cur = self.con.cursor()
         cur.execute(query)
         self.con.commit()
-        return data
+        return user_name
+
+    def get_user(self, email):
+        """This gets a specific user values"""
+        query = """ SELECT * FROM users where email='{}';""".format(email)
+        cur = self.con.cursor()
+        cur.execute(query)
+        user = cur.fetchone()
+        return user
