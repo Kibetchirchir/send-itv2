@@ -44,7 +44,9 @@ def tables():
             password VARCHAR(48) NOT NULL,
             user_name VARCHAR(250),
             is_admin BOOL NOT NULL DEFAULT '0',
-            is_active BOOL NOT NULL DEFAULT '0'
+            is_active BOOL NOT NULL DEFAULT '0',
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             );
             """
 
@@ -58,9 +60,9 @@ def tables():
             destination_from VARCHAR NOT NULL,
             destination_to VARCHAR(250) NOT NULL,
             status VARCHAR(48) NOT NULL DEFAULT 'not_picked',
-            longitude VARCHAR(6) NOT NULL,
-            latitude VARCHAR(6) NOT NULL,
             price int NOT NULL,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id)
                     REFERENCES users (user_id)
                     ON UPDATE CASCADE ON DELETE CASCADE
@@ -71,6 +73,9 @@ def tables():
                      token_id serial PRIMARY KEY,
                      user_id serial NOT NULL,
                      token VARCHAR(250),
+                     is_valid BOOL DEFAULT '0',
+                     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                      FOREIGN KEY (user_id)
                              REFERENCES users (user_id)
                              ON UPDATE CASCADE ON DELETE CASCADE                                          
