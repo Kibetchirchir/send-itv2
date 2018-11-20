@@ -9,6 +9,13 @@ install:
   - pip install pytest-cov
   - pip install coveralls
 
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database send_it;' -U postgres
+  - psql -c "CREATE USER postgres WITH PASSWORD 'v0k3ch!97';" -U postgres
+
 script:
   - pytest --cov=app/
 
