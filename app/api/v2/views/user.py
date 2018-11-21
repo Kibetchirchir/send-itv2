@@ -48,7 +48,8 @@ class Login(Resource):
         password_given = payload['password']
         user = UserModel()
         data = user.get_user(email)
-        if not data:  # returned from our model get_user
+        # returned from our model get_user
+        if not data:
             return {'status': 'failed', 'message': 'email not found'}, 401
         # True for admin and False for user
         role = data[4]
