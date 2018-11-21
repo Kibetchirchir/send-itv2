@@ -8,8 +8,8 @@ class UserTestCase(BaseClass):
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345",
                 "role": "user"}
-        res = self.client().post("api/v1/signup", json=self.user)
-        res = self.client().post("api/v1/login", json=data)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
+        res = self.client().post("api/v2/auth/login", json=data)
         self.assertEqual(res.status_code, 200)
         self.assertIn("user", str(res.data))
 
@@ -18,8 +18,8 @@ class UserTestCase(BaseClass):
         data = {"email": "admin@gmail.com",
                 "password": "admin",
                 "role": "admin"}
-        res = self.client().post("api/v1/signup", json=self.admin)
-        res = self.client().post("api/v1/login", json=data)
+        res = self.client().post("api/v2/auth/signup", json=self.admin)
+        res = self.client().post("api/v2/auth/login", json=data)
         self.assertEqual(res.status_code, 200)
         self.assertIn("admin", str(res.data))
 
@@ -28,8 +28,8 @@ class UserTestCase(BaseClass):
         data = {"email": "lanchirhir@gmail.com",
                 "password": "kevin",
                 "role": "user"}
-        res = self.client().post("api/v1/signup", json=self.user)
-        res = self.client().post("api/v1/login", json=data)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
+        res = self.client().post("api/v2/auth/login", json=data)
         self.assertEqual(res.status_code, 401)
         self.assertIn("email not found", str(res.data))
 
@@ -38,8 +38,8 @@ class UserTestCase(BaseClass):
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345",
                 "role": "admin"}
-        res = self.client().post("api/v1/signup", json=self.user)
-        res = self.client().post("api/v1/login", json=data)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
+        res = self.client().post("api/v2/auth/login", json=data)
         self.assertEqual(res.status_code, 403)
         self.assertIn("you are not an admin", str(res.data))
 
@@ -47,14 +47,14 @@ class UserTestCase(BaseClass):
         """Test API if user can access endpoint without all fields"""
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345"}
-        res = self.client().post("api/v1/signup", json=self.user)
-        res = self.client().post("api/v1/login", json=data)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
+        res = self.client().post("api/v2/auth/login", json=data)
         self.assertEqual(res.status_code, 400)
         self.assertIn("failed", str(res.data))
 
     def test_null_acceptable(self):
         """send a non json object to the api"""
-        res = self.client().post("api/v1/login", data=self.user)
+        res = self.client().post("api/v2/auth/login", data=self.user)
         self.assertEqual(res.status_code, 400)
         self.assertIn("failed", str(res.data))
 
@@ -63,8 +63,8 @@ class UserTestCase(BaseClass):
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin123",
                 "role": "user"}
-        res = self.client().post("api/v1/signup", json=self.user)
-        res = self.client().post("api/v1/login", json=data)
-        self.assertEqual(res.status_code, 200)
+        res = self.client().post("api/v2/auth/signup", json=self.user)
+        res = self.client().post("api/v2/auth/login", json=data)
+        self.assertEqual(res.status_code, 401)
         self.assertIn("wrong password", str(res.data))
 
