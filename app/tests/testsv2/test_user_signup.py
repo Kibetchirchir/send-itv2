@@ -29,4 +29,4 @@ class UserTestCase(BaseClass):
                 "password": "kevin12345"}
         res = self.client().post("api/v2/auth/signup", json=user)
         self.assertEqual(res.status_code, 400)
-        self.assertIn("Invalid email", str(res.data))
+        self.assertIn("bad request Invalid email", str(res.data))
