@@ -1,5 +1,6 @@
 """Docstring for models."""
 from ....db_config import init_db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class UserModel:
@@ -12,7 +13,7 @@ class UserModel:
         """this adds users to our dict"""
         user_name = data['name']
         user_email = data['email']
-        user_password = data['password']
+        user_password = generate_password_hash(data['password'])
         user_role = data['role']
         if user_role == "admin":
             role = 1
