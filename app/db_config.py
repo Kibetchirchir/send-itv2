@@ -40,8 +40,8 @@ def tables():
     """queries for our database to create our tables"""
     users = """ CREATE TABLE IF NOT EXISTS users(
             user_id serial PRIMARY KEY,
-            email VARCHAR(96) UNIQUE,
-            password VARCHAR(48) NOT NULL,
+            email VARCHAR(250) UNIQUE,
+            password VARCHAR(250) NOT NULL,
             user_name VARCHAR(250),
             is_admin BOOL NOT NULL DEFAULT '0',
             is_active BOOL NOT NULL DEFAULT '0',
