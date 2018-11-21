@@ -3,6 +3,7 @@ from flask import Flask, jsonify, make_response
 from flask_restplus import Api, Resource
 from ..models.user import UserModel
 from .validator import CheckRequired
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 api = Api(app)
@@ -56,7 +57,7 @@ class Login(Resource):
         else:
             role = "user"
         password = data[2]
-        if not password == password_given:
+        if not check_password_hash(password, password_given):
             return {'status': 'failed', 'message': 'wrong password'}, 401
         if role_provided == 'admin' and role == 'user':
             return {'status': 'failed', 'message': 'you are not an admin'}, 403
@@ -65,4 +66,3 @@ class Login(Resource):
                    "user_id": data[0]
                    }
         return {'status': 'success', 'message': 'Successful logged in', 'data': payload}, 200
-
