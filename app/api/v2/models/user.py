@@ -3,7 +3,7 @@ from ....db_config import init_db
 
 
 class UserModel:
-    """This is the model class to manipulate data"""
+    """This is the model class to manipulate user data"""
     def __init__(self):
         """Docstring initialize our connection"""
         self.con = init_db()
