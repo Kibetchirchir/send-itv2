@@ -9,7 +9,7 @@ class BaseClass(unittest.TestCase):
     """This base class for our testcases"""
     def setUp(self):
         """Define test variables and initialize app."""
-        self.app = create_app(config_name="testing")
+        self.app = create_app("testing")
         self.client = self.app.test_client
         self.user = {"name": "chirchir Kibet",
                      "email": "langatchirchir@gmail.com",
