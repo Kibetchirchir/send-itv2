@@ -19,7 +19,7 @@ class UserTestCase(BaseClass):
         res = self.client().post("api/v2/auth/signup", json=self.user)
         res = self.client().post("api/v2/auth/signup", json=self.user)
         self.assertEqual(res.status_code, 409)
-        self.assertIn("conflict email already used", str(res.data))
+        self.assertIn("Conflicting data. Email already exists", str(res.data))
 
     def test_validate_email(self):
         """Test API cannot take unvalidated email (POST request)"""
@@ -29,4 +29,4 @@ class UserTestCase(BaseClass):
                 "password": "kevin12345"}
         res = self.client().post("api/v2/auth/signup", json=user)
         self.assertEqual(res.status_code, 400)
-        self.assertIn("check your email", str(res.data))
+        self.assertIn("Invalid email", str(res.data))
