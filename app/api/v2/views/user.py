@@ -1,9 +1,10 @@
 """This is the view for sendit application"""
-from flask import Flask, jsonify, make_response
+from flask import Flask
 from flask_restplus import Api, Resource
 from ..models.user import UserModel
 from .validator import CheckRequired
 from werkzeug.security import check_password_hash
+from flask_jwt_extended import create_access_token
 
 app = Flask(__name__)
 api = Api(app)
@@ -58,12 +59,15 @@ class Login(Resource):
         else:
             role = "user"
         password = data[2]
+        name = data[3]
         if not check_password_hash(password, password_given):
             return {'status': 'failed', 'message': 'wrong password'}, 401
         if role_provided == 'admin' and role == 'user':
             return {'status': 'failed', 'message': 'you are not an admin'}, 403
-        payload = {"name": data[3],
+        payload = {"name": name,
                    "role": role,
-                   "user_id": data[0]
+                   "user_id": data[0],
                    }
+        access_token = create_access_token(identity=payload)
+        payload['token'] = access_token
         return {'status': 'success', 'message': 'Successful logged in', 'data': payload}, 200
