@@ -19,11 +19,14 @@ class BaseClass(unittest.TestCase):
                       "email": "admin@gmail.com",
                       "role": "admin",
                       "password": "admin"}
-        self.parcel = {"user_id": 1,
+        self.parcel = {"user_id": "d8bae0c0-e974-11e8-a266-b808cf9f9e6c",
                        "parcel_type": "letter",
-                       "recepient_number": "254715428709",
-                       "Dest": "Moi_avenue",
-                       "status": "on_transit"}
+                       "recepient_number": "428709",
+                       "recepient_name": "chirchir",
+                       "Dest": "dgfgf",
+                       "status": "delivered",
+                       "weight": "5",
+                       "Dest_from": "df"}
 
     def tearDown(self):
         destroy_tables()
