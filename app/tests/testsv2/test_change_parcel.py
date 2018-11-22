@@ -129,10 +129,10 @@ class ParcelTestCase(BaseClass):
                   "parcel_type": "letter",
                   "recepient_number": "428709",
                   "recepient_name": "chirchir",
-                  "Dest": "dgfgf",
+                  "drop_off_location": "dgfgf",
                   "status": "delivered",
                   "weight": "5",
-                  "Dest_from": "df"}
+                  "pick_up_location": "df"}
         res = self.client().post("api/v2/auth/signup", json=self.user)
         res2 = self.client().post("api/v2/auth/login", json=data)
         data = json.loads(res2.get_data(as_text=True))
