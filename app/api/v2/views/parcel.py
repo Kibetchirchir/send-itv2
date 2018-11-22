@@ -77,6 +77,7 @@ class ParcelChangeDestination(Resource):
 
 
 class AdminChangeStatus(Resource):
+    """Admin can change the status of the parcel"""
     @jwt_required
     def put(self, parcelid):
         payload = api.payload
@@ -101,3 +102,32 @@ class AdminChangeStatus(Resource):
             return {'status': 'failed', 'message': 'There was an error processing data'}, 500
         parcels['status'] = "processing"
         return {'status': 'success', 'message': 'Waiting for confirmation', "data": parcels}, 202
+
+
+class AdminChangeLocation(Resource):
+    """Admin can change the status of the parcel"""
+    @jwt_required
+    def put(self, parcelid):
+        payload = api.payload
+        if not payload:
+            return {'status': 'failed', 'message': 'please provide a json data'}, 400
+        if not all(key in payload for key in ['location']):
+            return {'status': 'failed', 'message': 'please provide the destination'}, 400
+        check_empty = CheckRequired(payload)
+        checked_empty = check_empty.check_data_payload()
+        if not checked_empty:
+            return {'status': 'failed', 'message': 'bad request no empty value allowed'}, 400
+        parcel = ParcelModel()
+        parcels = parcel.get_parcel(parcelid)
+        current_user = get_jwt_identity()
+        role = current_user['role']
+        if not role == 'admin':
+            return {'status': 'failed', 'message': 'Unauthorised. you are not allowed'}, 403
+        if not parcels:
+            return {'status': 'failed', 'message': 'parcel ID does not exist', "data": parcels}, 404
+        change = parcel.change_location(payload['location'], parcelid)
+        if not change:
+            return {'status': 'failed', 'message': 'There was an error processing data'}, 500
+        parcels['current_location'] = payload['location']
+        return {'status': 'success', 'message': 'Waiting for confirmation', "data": parcels}, 202
+
