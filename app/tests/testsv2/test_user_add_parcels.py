@@ -78,4 +78,3 @@ class ParcelTestCase(BaseClass):
         res = self.client().post("api/v2/parcels", json=parcel, headers=dict(Authorization="Bearer " + token))
         self.assertEqual(res.status_code, 400)
         self.assertIn("bad request no empty value allowed", str(res.data))
-
