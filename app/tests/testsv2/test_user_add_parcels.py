@@ -57,7 +57,7 @@ class ParcelTestCase(BaseClass):
         token = data['data']['token']
         res = self.client().post("api/v2/parcels", json=self.parcel, headers=dict(Authorization="Bearer " + token))
         self.assertEqual(res.status_code, 403)
-        self.assertIn("unauthorized only the user can add a parcel", str(res.data))
+        self.assertIn("Only authorized users can add a parcel", str(res.data))
 
     def test_empty_field(self):
         parcel = {"user_id": "d8bae0c0-e974-11e8-a266-b808cf9f9e6c",

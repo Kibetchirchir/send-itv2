@@ -25,7 +25,7 @@ class Parcels(Resource):
         current_user = get_jwt_identity()
         role = current_user['role']
         if role == 'admin':
-            return {'status': 'failed', 'message': 'unauthorized only the user can add a parcel'}, 403
+            return {'status': 'failed', 'message': 'Only authorized users can add a parcel'}, 403
         if not checked_empty:
             return {'status': 'failed', 'message': 'bad request no empty value allowed'}, 400
         parcel = ParcelModel()
