@@ -24,7 +24,7 @@ class BaseClass(unittest.TestCase):
                        "recepient_number": "428709",
                        "recepient_name": "chirchir",
                        "drop_off_location": "dgfgf",
-                       "status": "delivered",
+                       "status": "not_picked",
                        "weight": "5",
                        "pick_up_location": "df"}
 
