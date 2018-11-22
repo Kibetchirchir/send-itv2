@@ -105,3 +105,11 @@ class ParcelModel:
         count = cur.rowcount
         if count > 0:
             return True
+
+    def change_location(self, location, order_id):
+        query = """update parcels set destination_from ='{}' where parcel_id='{}';""".format(location, order_id)
+        cur = self.con.cursor()
+        cur.execute(query)
+        count = cur.rowcount
+        return True
+
