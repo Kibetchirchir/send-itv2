@@ -4,6 +4,7 @@ attrs==18.2.0
 Click==7.0
 coverage==4.5.1
 Flask==1.0.2
+Flask-JWT-Extended==3.13.1
 Flask-RESTful==0.3.6
 flask-restplus==0.12.1
 gunicorn==19.9.0
@@ -12,12 +13,16 @@ Jinja2==2.10
 jsonschema==2.6.0
 MarkupSafe==1.1.0
 more-itertools==4.3.0
+passlib==1.7.1
 pathlib2==2.3.2
 pluggy==0.8.0
 psycopg2==2.7.6
+psycopg2-binary==2.7.6.1
 py==1.7.0
+PyJWT==1.6.4
 pytest==3.10.0
 pytest-cov==2.6.0
+python-dotenv==0.9.1
 pytz==2018.7
 six==1.11.0
 Werkzeug==0.14.1
