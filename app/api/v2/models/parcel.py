@@ -31,3 +31,4 @@ class ParcelModel:
         self.con.commit()
         data['order_no'] = order_id
         return data
+
