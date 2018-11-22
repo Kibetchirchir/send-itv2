@@ -61,7 +61,7 @@ class ParcelModel:
         if role == "admin":
             results = []
             query = """select * from parcels;"""
-            cursor = self.con.cursor(cursor_factory=RealDictCursor)
+            cursor = self.con.cursor()
             cursor.execute(query)
             parcels = cursor.fetchall()
             for row in parcels:

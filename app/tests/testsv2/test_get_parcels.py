@@ -13,7 +13,8 @@ class ParcelTestCase(BaseClass):
         res2 = self.client().post("api/v2/auth/login", json=data)
         data = json.loads(res2.get_data(as_text=True))
         token = data['data']['token']
-        res = self.client().post("api/v2/parcels", json=self.parcel, headers=dict(Authorization="Bearer " + token))
+        res = self.client().post("api/v2/parcels", json=self.parcel, headers=dict(Authorization=
+                                                                                  "Bearer " + token))
         res = self.client().get("api/v2/parcels", headers=dict(Authorization="Bearer " + token))
         self.assertEqual(res.status_code, 200)
         self.assertIn("success", str(res.data))
@@ -47,8 +48,8 @@ class ParcelTestCase(BaseClass):
         res = self.client().post("api/v2/auth/signup", json=self.admin)
         res = self.client().post("api/v2/auth/login", json=data)
         data = json.loads(res.get_data(as_text=True))
-        token = data['data']['token']
-        res = self.client().get("api/v2/parcels", headers=dict(Authorization="Bearer " + token))
+        token1 = data['data']['token']
+        res = self.client().get("api/v2/parcels", headers=dict(Authorization="Bearer " + token1))
         self.assertEqual(res.status_code, 200)
-        self.assertIn("no parcels posted yet", str(res.data))
+        self.assertIn("success", str(res.data))
 
