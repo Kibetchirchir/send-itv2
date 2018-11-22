@@ -32,3 +32,27 @@ class ParcelModel:
         data['order_no'] = order_id
         return data
 
+    def get_parcel(self, order_id):
+        """This method checks for a specific parcel"""
+        query = """select * from parcels where parcel_id='{}';""".format(order_id)
+        cur = self.con.cursor()
+        cur.execute(query)
+        parcel = cur.fetchone()
+        if not parcel:
+            return False
+        status = parcel[8]
+        user_id = parcel[1]
+        data = {"status": status,
+                "user_id": user_id}
+        return data
+
+    def change_dest(self, dest, order_id):
+        """change the destination for our parcel"""
+        query = """update parcels set destination_to ='{}' where parcel_id='{}';""".format(dest, order_id)
+        cur = self.con.cursor()
+        cur.execute(query)
+        count = cur.rowcount
+        print(count)
+        if count > 0:
+            return True
+
