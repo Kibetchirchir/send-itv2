@@ -51,11 +51,11 @@ def tables():
             """
 
     parcels = """ CREATE TABLE IF NOT EXISTS parcels(
-            parcel_id serial PRIMARY KEY,
+            parcel_id VARCHAR(259) PRIMARY KEY,
             user_id serial NOT NULL,
             parcel_type VARCHAR(100),
             recipient_name VARCHAR(100) NOT NULL,
-            recipient_number int,
+            recipient_number varchar(20),
             weight INT NOT NULL,
             destination_from VARCHAR NOT NULL,
             destination_to VARCHAR(250) NOT NULL,

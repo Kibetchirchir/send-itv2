@@ -1,5 +1,6 @@
 """Docstring This class for our parcel model"""
 from ....db_config import init_db
+import uuid
 
 
 class ParcelModel:
@@ -19,12 +20,14 @@ class ParcelModel:
         recepient = data['recepient_number']
         weight = data['weight']
         price = 20
-        query = """ INSERT INTO parcels(user_id, parcel_type, recipient_name, recipient_number, weight, 
+        order_id = str(uuid.uuid1())
+        query = """ INSERT INTO parcels(parcel_id, user_id, parcel_type, recipient_name, recipient_number, weight, 
                     destination_from,destination_to, status,price )
-                     values ('{}', '{}', '{}', '{}', '{}', '{}', '{}', 
-                     '{}', '{}');""".format(user_id, parcel_type, recepient_name, recepient, weight, dest_from,
+                     values ('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', 
+                     '{}', '{}');""".format(order_id, user_id, parcel_type, recepient_name, recepient, weight, dest_from,
                                             dest, status, price)
         cur = self.con.cursor()
         cur.execute(query)
         self.con.commit()
+        data['order_no'] = order_id
         return data
