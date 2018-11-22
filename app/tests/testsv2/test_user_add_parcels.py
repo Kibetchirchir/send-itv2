@@ -1,6 +1,5 @@
 from . import BaseClass
 import json
-import pdb
 
 
 class ParcelTestCase(BaseClass):
