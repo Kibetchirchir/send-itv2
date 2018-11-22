@@ -13,8 +13,8 @@ class ParcelModel:
     def add_parcel(self, data, user_id):
         """This method adds parcels to our parcels"""
         parcel_type = data['parcel_type']
-        dest = data['Dest']
-        dest_from = data['Dest_from']
+        drop_off_location = data['drop_off_location']
+        pick_up_location = data['pick_up_location']
         status = data['status']
         recepient_name = data['recepient_name']
         recepient = data['recepient_number']
@@ -24,8 +24,8 @@ class ParcelModel:
         query = """ INSERT INTO parcels(parcel_id, user_id, parcel_type, recipient_name, recipient_number, weight, 
                     destination_from,destination_to, status,price )
                      values ('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', 
-                     '{}', '{}');""".format(order_id, user_id, parcel_type, recepient_name, recepient, weight, dest_from,
-                                            dest, status, price)
+                     '{}', '{}');""".format(order_id, user_id, parcel_type, recepient_name, recepient, weight,
+                                            pick_up_location,drop_off_location, status, price)
         cur = self.con.cursor()
         cur.execute(query)
         self.con.commit()

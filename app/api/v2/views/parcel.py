@@ -17,7 +17,8 @@ class Parcels(Resource):
         if not api.payload:
             return {'status': 'failed', 'message': 'please provide a json data'}, 400
         payload = api.payload
-        if not all(key in payload for key in ['user_id', 'parcel_type', 'Dest', 'status']):
+        if not all(key in payload for key in ['user_id', 'parcel_type', 'drop_off_location', 'pick_up_location',
+                                              'status']):
             return {'status': 'failed', 'message': 'bad request all required fields'}, 400
         check_empty = CheckRequired(payload)
         checked_empty = check_empty.check_data_payload()

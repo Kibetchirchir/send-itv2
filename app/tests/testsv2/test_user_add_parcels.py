@@ -65,10 +65,10 @@ class ParcelTestCase(BaseClass):
                   "parcel_type": "letter",
                   "recepient_number": "428709",
                   "recepient_name": "chirchir",
-                  "Dest": "dgfgf",
+                  "drop_off_location": "dgfgf",
                   "status": "",
                   "weight": "5",
-                  "Dest_from": "df"}
+                  "pick_up_location": "df"}
         data = {"email": "langatchirchir@gmail.com",
                 "password": "kevin12345",
                 "role": "user"}

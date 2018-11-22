@@ -23,10 +23,10 @@ class BaseClass(unittest.TestCase):
                        "parcel_type": "letter",
                        "recepient_number": "428709",
                        "recepient_name": "chirchir",
-                       "Dest": "dgfgf",
+                       "drop_off_location": "dgfgf",
                        "status": "delivered",
                        "weight": "5",
-                       "Dest_from": "df"}
+                       "pick_up_location": "df"}
 
     def tearDown(self):
         destroy_tables()
