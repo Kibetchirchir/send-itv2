@@ -19,12 +19,11 @@ class BaseClass(unittest.TestCase):
                       "email": "admin@gmail.com",
                       "role": "admin",
                       "password": "admin"}
-        self.parcel = {"user_id": "d8bae0c0-e974-11e8-a266-b808cf9f9e6c",
-                       "parcel_type": "letter",
-                       "recepient_number": "428709",
+        self.parcel = {"parcel_type": "box",
+                       "recepient_number": "254715428709",
                        "recepient_name": "chirchir",
                        "drop_off_location": "dgfgf",
-                       "status": "not_picked",
+                       "status": "not-picked",
                        "weight": "5",
                        "pick_up_location": "df"}
 

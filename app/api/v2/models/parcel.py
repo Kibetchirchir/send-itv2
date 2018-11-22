@@ -1,6 +1,7 @@
 """Docstring This class for our parcel model"""
 from ....db_config import init_db
 import uuid
+from psycopg2.extras import RealDictCursor
 
 
 class ParcelModel:
@@ -52,7 +53,47 @@ class ParcelModel:
         cur = self.con.cursor()
         cur.execute(query)
         count = cur.rowcount
-        print(count)
         if count > 0:
             return True
 
+    def get_all_parcels(self, role, user_id):
+        """Get all parcels by users"""
+        if role == "admin":
+            results = []
+            query = """select * from parcels;"""
+            cursor = self.con.cursor()
+            cursor.execute(query)
+            parcels = cursor.fetchall()
+            for row in parcels:
+                parcel = {"parcel_id": row[0],
+                          "parcel_type": row[2],
+                          "Recepeint_name": row[3],
+                          "Recepient_number": row[4],
+                          "Weight": row[5],
+                          "pick-up-point": row[6],
+                          "drop_off": row[7],
+                          "status": row[8],
+                          "Price": row[9],
+                          "date_ordered": str(row[10])
+                          }
+                results.append(parcel)
+        else:
+            query = """select * from parcels where user_id='{}';""".format(user_id)
+            cursor = self.con.cursor()
+            cursor.execute(query)
+            parcels = cursor.fetchall()
+            results = []
+            for row in parcels:
+                parcel = {"parcel_id": row[0],
+                          "parcel_type": row[2],
+                          "Recepeint_name": row[3],
+                          "Recepient_number": row[4],
+                          "Weight": row[5],
+                          "pick-up-point": row[6],
+                          "drop_off": row[7],
+                          "status": row[8],
+                          "Price": row[9],
+                          "date_ordered": str(row[10])
+                          }
+                results.append(parcel)
+        return results
