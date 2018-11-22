@@ -27,7 +27,7 @@ class ParcelTestCase(BaseClass):
         res = self.client().put("api/v2/parcels/" + order_id + "/status", json=status,
                                 headers=dict(Authorization="Bearer " + token_admin))
         self.assertEqual(res.status_code, 202)
-        self.assertIn("processing", str(res.data))
+        self.assertIn("Waiting for confirmation", str(res.data))
 
     def test_empty_payload(self):
         """This test if our api can process an empty payload"""

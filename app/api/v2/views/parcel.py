@@ -100,4 +100,4 @@ class AdminChangeStatus(Resource):
         if not change:
             return {'status': 'failed', 'message': 'There was an error processing data'}, 500
         parcels['status'] = "processing"
-        return {'status': 'success', 'message': 'processing', "data": parcels}, 202
+        return {'status': 'success', 'message': 'Waiting for confirmation', "data": parcels}, 202
