@@ -97,3 +97,13 @@ class ParcelModel:
                           }
                 results.append(parcel)
         return results
+
+    def change_status(self, status, order_id):
+        query = """update parcels set status ='{}' where parcel_id='{}';""".format(status, order_id)
+        cur = self.con.cursor()
+        cur.execute(query)
+        print(query)
+        count = cur.rowcount
+        print(count)
+        if count > 0:
+            return True
