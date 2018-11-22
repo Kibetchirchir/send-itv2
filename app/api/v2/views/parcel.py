@@ -33,6 +33,17 @@ class Parcels(Resource):
         data = parcel.add_parcel(payload, user_id)
         return {'status': 'added', 'message': 'Successfully added', 'parcel': data}, 201
 
+    @jwt_required
+    def get(self):
+        current_user = get_jwt_identity()
+        role = current_user['role']
+        user_id = current_user['user_id']
+        parcel = ParcelModel()
+        parcels = parcel.get_all_parcels(role, user_id)
+        if not parcels:
+            return {'status': 'success', 'message': "no parcels posted yet"}, 200
+        return {'status': 'success', 'message': parcels}, 200
+
 
 class ParcelChangeDestination(Resource):
     @jwt_required
