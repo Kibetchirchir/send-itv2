@@ -2,7 +2,7 @@
 
 
 
-[![Build Status](https://travis-ci.org/Kibetchirchir/send-itv2.svg?branch=develop)](https://travis-ci.org/Kibetchirchir/send-itv2)   [![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-itv2/badge.svg?branch=develop)](https://coveralls.io/github/Kibetchirchir/send-itv2?branch=develop)  <a href="https://codeclimate.com/github/Kibetchirchir/send-itv2/maintainability"><img src="https://api.codeclimate.com/v1/badges/0d2c78b733c04cb04d6e/maintainability" /></a>   [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Build Status](https://travis-ci.org/Kibetchirchir/send-itv2.svg?branch=develop)](https://travis-ci.org/Kibetchirchir/send-itv2)   [![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-itv2/badge.svg?branch=develop)](https://coveralls.io/github/Kibetchirchir/send-itv2?branch=develop)    [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 
 #### This is an application that allows user to send parcel online
