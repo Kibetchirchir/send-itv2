@@ -2,7 +2,7 @@
 
 
 
-[![Build Status](https://travis-ci.org/Kibetchirchir/send-it.svg?branch=ft-specific-deliveries-161743205)](https://travis-ci.org/Kibetchirchir/send-it)   [![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-it/badge.svg?branch=ft-specific-deliveries-161743205)](https://coveralls.io/github/Kibetchirchir/send-it?branch=ft-specific-deliveries-161743205)  <a href="https://codeclimate.com/github/Kibetchirchir/send-it/maintainability"><img src="https://api.codeclimate.com/v1/badges/0700db556fe2d04d93fc/maintainability" /></a>   [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Build Status](https://travis-ci.org/Kibetchirchir/send-itv2.svg?branch=develop)](https://travis-ci.org/Kibetchirchir/send-itv2)   [![Coverage Status](https://coveralls.io/repos/github/Kibetchirchir/send-itv2/badge.svg?branch=develop)](https://coveralls.io/github/Kibetchirchir/send-itv2?branch=develop)    [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 
 #### This is an application that allows user to send parcel online
@@ -38,6 +38,15 @@
  
  ## Endpoints
  
- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/75c1b6a0196c63d62c57)
+ [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a81bf187fe57c3bb1ac0)
  
 
+# Documentation
+
+https://documenter.getpostman.com/view/4007386/RzfZNsXQ
+
+
+
+# Heroku link
+
+https://senditv2.herokuapp.com
