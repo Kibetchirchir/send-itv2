@@ -7,9 +7,6 @@ class SendMail:
         pass
 
     def send_mail(self, message, to, subject):
-        TO = to
-        SUBJECT = subject
-        TEXT = message
         # Gmail Sign In
         gmail_sender = os.getenv("EMAIL")
         gmail_passwd = os.getenv("EMAIL_PASS")
@@ -19,13 +16,13 @@ class SendMail:
         server.starttls()
         server.login(gmail_sender, gmail_passwd)
 
-        BODY = '\r\n'.join(['To: %s' % TO,
+        BODY = '\r\n'.join(['To: %s' % to,
                             'From: %s' % gmail_sender,
-                            'Subject: %s' % SUBJECT,
-                            '', TEXT])
+                            'Subject: %s' % subject,
+                            '', message])
 
         try:
-            server.sendmail(gmail_sender, [TO], BODY)
+            server.sendmail(gmail_sender, [to], BODY)
             res = "sent"
         except:
             res = "fail"
