@@ -137,7 +137,8 @@ class AdminChangeLocation(Resource):
         user = UserModel()
         user_data = user.get_user_email(user_id)
         user_email = user_data[1]
-        message = "Hey Customer the current location of your parcel "+ parcelid + " is now in" + parcels['current_location']
+        message = "Hey Customer the current location of your parcel " + parcelid + " is now in\n" \
+                                                                                   "" + parcels['current_location']
         email = SendMail()
         email.send_mail(message, user_email, "Parcel update")
         return {'status': 'success', 'message': 'Waiting for confirmation', "data": parcels}, 202
