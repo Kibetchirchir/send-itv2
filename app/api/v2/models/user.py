@@ -34,3 +34,11 @@ class UserModel:
         cur.execute(query)
         user = cur.fetchone()
         return user
+
+    def get_user_email(self, user_id):
+        """This gets the email of the user"""
+        query = """ SELECT * FROM users where user_id='{}';""".format(user_id)
+        cur = self.con.cursor()
+        cur.execute(query)
+        user = cur.fetchone()
+        return user

@@ -112,4 +112,3 @@ class ParcelModel:
         cur.execute(query)
         count = cur.rowcount
         return True
-

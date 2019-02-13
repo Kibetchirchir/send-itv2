@@ -4,6 +4,8 @@ from flask_restplus import Api, Resource
 from ..models.parcel import ParcelModel
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .validator import CheckRequired
+from .mailing import SendMail
+from .user import UserModel
 
 app = Flask(__name__)
 api = Api(app)
@@ -105,7 +107,7 @@ class AdminChangeStatus(Resource):
 
 
 class AdminChangeLocation(Resource):
-    """Admin can change the status of the parcel"""
+    """Admin can change the destination of the parcel"""
     @jwt_required
     def put(self, parcelid):
         payload = api.payload
@@ -129,5 +131,14 @@ class AdminChangeLocation(Resource):
         if not change:
             return {'status': 'failed', 'message': 'There was an error processing data'}, 500
         parcels['current_location'] = payload['location']
+        # get the user_id
+        user_id = parcels["user_id"]
+        # Get the user email
+        user = UserModel()
+        user_data = user.get_user_email(user_id)
+        user_email = user_data[1]
+        message = "Hey Customer the current location of your parcel " + parcelid + " is now in\n" \
+                                                                                   "" + parcels['current_location']
+        email = SendMail()
+        email.send_mail(message, user_email, "Parcel update")
         return {'status': 'success', 'message': 'Waiting for confirmation', "data": parcels}, 202
-
